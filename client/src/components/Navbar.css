@@ -1,0 +1,28 @@
+.navbar {
+    position: absolute;
+    left: 0;
+    width: 15%;
+    height: 100%;
+    border-right: 1px solid #4a4661;
+    background-color: #282c34;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 100%;
+  }
+  
+  .navbar li {
+    justify-self: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #b2b1be;
+    width: 80%;
+    height: 30px;
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: #c7c7c7;
+  }
+  
