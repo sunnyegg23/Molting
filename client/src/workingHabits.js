@@ -10,8 +10,8 @@ function App(){
     const [learningType, setLearningType] = useState('');
     const [optional, setOptional] = useState('');
 
-    const handleCreatHabit = async() => {
-
+    const handleCreatHabit = async() => {  // async() = 非同步函式，自動回傳promise，搭配await使用
+ 
       const data = {
         user_id : userId,
         profile: profile,
@@ -24,15 +24,15 @@ function App(){
         }
       };
 
-      try {
-        const response = await fetch('http://localhost:5000/api/habits',{
+      try {               // 等待伺服器回傳資料
+        const response = await fetch('http://localhost:5000/api/habits',{ // await = 等待這個Promise結果處理完再繼續下一行
           method: 'POST',
           headers: { 'Content-Type':'application/json'},
           body: JSON.stringify(data),
       });
      
 
-        const result = await response.json();
+        const result = await response.json(); // 等待JSON解析完，再往下一行
         alert(result.message);
         } catch (error){
         console.error('錯誤:',error);
