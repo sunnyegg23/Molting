@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 function Navbar() {
   return (
     <div className="navbar">
+      <p style={{color:"white", marginLeft:"6%", fontWeight:"Bold", fontSize:"30px", marginTop:"5%"}}>Molting</p>
       <ul>
         <li>
           <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>首頁</NavLink>
