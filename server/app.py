@@ -79,5 +79,16 @@ def update_habits():
         # 如果發生錯誤，回傳錯誤訊息
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/users/<user_id>/habits', methods=['POST'])
+def create_habit(user_id):
+    try:
+        data = request.json
+        habit_ref = db.collection('users').document(user_id)\
+                      .collection('habitsDevelop').document()
+        habit_ref.set(data)
+        return jsonify({"id": habit_ref.id}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
 if __name__ == '__main__':
     app.run(debug=True)
