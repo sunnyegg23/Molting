@@ -1,6 +1,6 @@
-import {useState} from 'react';
+import react,{useState} from 'react';
 
-function App(){
+function WorkingHabitsPage(){
 
     const [userId, setUserId] = useState('Christine'); //等下固定userId
     const [userType, setUserType] = useState('');
@@ -123,4 +123,4 @@ return (
 );
 
 }
-export default App;
+export default WorkingHabitsPage;
