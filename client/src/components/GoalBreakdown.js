@@ -1,47 +1,48 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../css/ArticleReminder.css';
 
-export default function ArticleReminder({onClose}) {
-    const [name, setName] = useState('');
-    const [date, setDate] = useState('');
-    const [mode, setMode] = useState('簡易');
+export default function ArticleReminder({ onClose }) {
+  const [name, setName] = useState('');
+  const [date, setDate] = useState('');
+  const [mode, setMode] = useState('簡易');
+  const [description, setDescription] = useState(''); // 新增描述字段
 
-    const handleCreate = async () => {
-        if (!name || !date || !mode) {
-            alert('請填寫所有欄位');
-            return;
-        }
-        // 這裡請根據你的 user_id 來源調整
-        const userId = "user123"; // 例如從 props 或 context 拿
-        const url = `http://localhost:5000/api/users/${userId}/article_reminders`;
+  const handleCreate = async () => {
+    if (!name || !date || !mode || !description) { // 增加字段驗證
+      alert('請填寫所有欄位');
+      return;
+    }
 
-        // 將日期轉成 ISO 字串，後端可直接轉 Firestore date
-        const payload = {
-            eventName: name,
-            eventDeadLine: date, // 直接傳 YYYY-MM-DD，後端轉成 date
-            eventMode: mode
-        };
+    const userId = "user123";
+    const url = `http://localhost:5000/api/users/${userId}/goal_breakdown`; // 修正API端點
 
-        try {
-            const res = await fetch(url, {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(payload)
-            });
-            if (res.ok) {
-                alert('建立成功！');
-                onClose();
-            } else {
-                const err = await res.json();
-                alert('建立失敗：' + (err.error || res.status));
-            }
-        } catch (e) {
-            alert('網路錯誤');
-        }
+    const payload = {
+      eventName: name,
+      eventDeadLine: date,
+      eventMode: mode,
+      eventDescription: description // 新增字段
     };
 
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
 
-    return (
+      if (res.ok) {
+        alert('建立成功！');
+        onClose();
+      } else {
+        const err = await res.json();
+        alert(`建立失敗：${err.error || res.status}`);
+      }
+    } catch (e) {
+      alert('網路錯誤');
+    }
+  };
+
+  return (
         <div className="reminder-modal">
             <div className="reminder-container">
                 <button className="close-btn" onClick={onClose}>×</button>
@@ -52,12 +53,12 @@ export default function ArticleReminder({onClose}) {
                         type="text"
                         value={name}
                         onChange={e => setName(e.target.value)}
-                        placeholder="跟客戶開會"
+                        placeholder="專案製作"
                     />
                 </div>
                 <div className="reminder-row">
                     <div className="reminder-title">目標類型：</div>
-                    <span className="reminder-type">記事提醒</span>
+                    <span className="reminder-type">目標規劃</span>
                 </div>
                 <div className="reminder-row">
                     <div className="reminder-title">日期：</div>
@@ -86,6 +87,16 @@ export default function ArticleReminder({onClose}) {
                     >進階
                     </button>
                 </div>
+
+                <div className="reminder-row">
+          <div className="reminder-title">描述：</div>
+          <textarea
+            className="reminder-textarea"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            placeholder="輸入事件詳細描述"
+          />
+        </div>
                 <button className="reminder-create-btn" onClick={handleCreate}>建立</button>
             </div>
         </div>
