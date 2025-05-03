@@ -1,0 +1,141 @@
+.reminder-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  background: rgba(0,0,0,0.15); /* 半透明遮罩，可選 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reminder-container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  padding: 48px 32px 100px 32px;
+  min-width: 600px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+
+.close-btn {
+  position: absolute;
+  top: 24px;
+  left: 32px;
+  background: transparent;
+  border: none;
+  font-size: 56px;
+  color: #A0A8AA;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.reminder-header {
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.reminder-title {
+  font-size: 24px;
+  color: #757575;
+  min-width: 80px;
+}
+
+.reminder-input {
+  font-size: 22px;
+  padding: 8px 16px;
+  border: 1.5px solid #B0BEC5;
+  border-radius: 8px;
+  width: 260px;
+  color: #757575;
+}
+
+.reminder-row {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.reminder-type {
+  font-size: 22px;
+  color: #757575;
+}
+
+.reminder-date {
+  width: 160px;
+  padding-right: 36px; /* 預留 icon 空間 */
+  color: #222;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+
+.reminder-date-btn {
+  margin-left: 8px;
+  font-size: 20px;
+  background: #fff;
+  border: 1.5px solid #B0BEC5;
+  border-radius: 8px;
+  color: #B0BEC5;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.reminder-desc {
+  margin-top: 32px;
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
+}
+
+.reminder-switch {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  display: flex;
+  background: #ECEFF1;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.switch-btn {
+  border: none;
+  background: transparent;
+  color: #757575;
+  font-size: 20px;
+  padding: 8px 32px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.switch-btn.active {
+  background: #90A4AE;
+  color: #fff;
+}
+
+.reminder-create-btn {
+  position: absolute;
+  right: 32px;
+  bottom: 32px;
+  width: 120px;
+  height: 56px;
+  background: #B0BEC5;
+  color: #fff;
+  font-size: 28px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  letter-spacing: 8px;
+}
