@@ -5,6 +5,8 @@ import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import '../css/Calendar.css';
 import Navbar from '../components/Navbar'; // 路徑根據實際位置調整
+import FloatingMenu from "./FloatingMenu";
+
 
 function CalenderPage() {
   const [date, setDate] = useState(new Date());
@@ -18,9 +20,12 @@ function CalenderPage() {
 
   return (
     <div className="CalendarPage">
+
       <Navbar />
       <header className="Calender-header">
+
         <div className="calendar-container">
+          <FloatingMenu />
           <div style={{display:"flex",padding:"5px"}}>
             <div className="calendar-box"style={{width: '575px',marginRight:"20px"}}>
               <Calendar style={{width:"100%",height:"100%"}} value={date} onChange={(e) => setDate(e.value)} inline/>
@@ -47,6 +52,8 @@ function CalenderPage() {
         </div>
 
       </header>
+
+
 
     </div>
   );

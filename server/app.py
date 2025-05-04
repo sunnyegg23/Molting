@@ -1,17 +1,23 @@
+# app.py 修改後程式碼
 import firebase_admin
 from firebase_admin import credentials, firestore
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-# 初始化 Firebase（第一次用）
-cred = credentials.Certificate("molting-llm-firebase-adminsdk-fbsvc-f5642adbc4.json")  # Firebase 控制台下載的金鑰
+# 第一步：初始化 Firebase
+cred = credentials.Certificate("molting-llm-firebase-adminsdk-fbsvc-f5642adbc4.json")
 firebase_admin.initialize_app(cred)
-
 db = firestore.client()
 
+# 第二步：初始化 Flask
 app = Flask(__name__)
-CORS(app)  # 啟用跨域請求支持
+CORS(app)
+
+# 第三步：導入藍圖（此時 Firebase 已初始化）
+from article_reminder.routes import article_bp
+from goal_breakdown.routes import breakdown_bp
+app.register_blueprint(article_bp, url_prefix='/api')
+app.register_blueprint(breakdown_bp, url_prefix='/api')
 
 @app.route('/api/habits',methods=['POST'])
 def create_habits():
