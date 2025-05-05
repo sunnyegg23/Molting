@@ -4,13 +4,14 @@
 }
 
 .fab-btn {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: #90A4AE;
-  color: #fff;
-  font-size: 32px;
-  border: none;
+  width: 115px;
+  height: 40px;
+  border-radius: 5%;
+  background: #90a4ae00;
+  border: 1px solid #68c98c;
+  color: #68c98c;
+  font-size: 16px;
+
   cursor: pointer;
 }
 

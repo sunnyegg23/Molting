@@ -19,7 +19,7 @@ export default function FloatingMenu() {
     <div className="floating-menu-container">
       {/* 主按鈕 */}
       <button className="fab-btn" onClick={() => { setOpen(true); setCurrentPage(null); }}>
-        +
+        + 新增事務
       </button>
 
       {/* 主選單（只有 open=true 而且 currentPage=null 才顯示） */}

@@ -22,10 +22,14 @@ function CalenderPage() {
     <div className="CalendarPage">
 
       <Navbar />
-      <header className="Calender-header">
-
+      <div className="Calender-header">
+        <div style={{marginLeft:"15%",width:"70%",marginBottom:"38%"}}>
+          <div style={{marginLeft:"95%"}}>
+            <FloatingMenu />
+          </div>
+        </div>  
         <div className="calendar-container">
-          <FloatingMenu />
+
           <div style={{display:"flex",padding:"5px"}}>
             <div className="calendar-box"style={{width: '575px',marginRight:"20px"}}>
               <Calendar style={{width:"100%",height:"100%"}} value={date} onChange={(e) => setDate(e.value)} inline/>
@@ -51,7 +55,7 @@ function CalenderPage() {
           </div>
         </div>
 
-      </header>
+      </div>
 
 
 
