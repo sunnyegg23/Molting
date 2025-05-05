@@ -9,6 +9,18 @@ cred = credentials.Certificate("molting-llm-firebase-adminsdk-fbsvc-f5642adbc4.j
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
+# ====test====
+
+import requests
+import os
+from mistralai import Mistral
+os.environ["MISTRAL_API_KEY"] = "j7hdETzHa2fl3jUkujuueAfRhBsglW6l"
+api_key = os.environ["MISTRAL_API_KEY"]
+model = "open-mistral-7b"
+client = Mistral(api_key=api_key)
+
+# ====test====
+
 # 第二步：初始化 Flask
 app = Flask(__name__)
 CORS(app)
@@ -95,6 +107,39 @@ def create_habit(user_id):
         return jsonify({"id": habit_ref.id}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+    
+# ====test====
+
+@app.route('/api/schedule', methods=['POST'])
+def generate_schedule():
+    data = request.get_json()
+
+    required_fields = ['user_type', 'current_working_F', 'ideal_working_f', 'learning_type', 'optional']
+    if not all(field in data for field in required_fields):
+        return jsonify({'error': '缺少必要欄位'}), 400
+
+    prompt = f"""
+你是一位時間管理與行為心理學專家。請根據下列使用者資料，幫他規劃出「今日的任務清單」，格式需包含時間區段、任務名稱與簡要目的。
+
+使用者類型：{data['user_type']}
+目前做事頻率：{data['current_working_F']}
+理想做事頻率：{data['ideal_working_f']}
+學習偏好：{data['learning_type']}
+額外資訊：{data['optional']}
+
+請以工作日為基礎規劃，時間從早上 9 點至晚上 9 點。
+"""
+
+    try:
+        response = client.chat.complete(
+            model = model,
+            messages = [{"role": "user", "content": prompt}]
+        )
+        message = response.choices[0].message.content
+        return jsonify({'schedule': message}), 200
+
+    except Exception as e:
+        return jsonify({'error': f'呼叫 Mistral SDK 失敗: {str(e)}'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
