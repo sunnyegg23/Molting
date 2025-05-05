@@ -1,9 +1,11 @@
 import react,{useState} from 'react';
 import Navbar from '../components/Navbar'; 
-import { Dropdown } from 'primereact/dropdown';
+import React, { useRef } from 'react';
+import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
 
 function WorkingHabitsPage(){
-
+    const toast = useRef(null);
     const [userId, setUserId] = useState('Christine'); //等下固定userId
     const [userType, setUserType] = useState('');
     const [profile, setProfile] = useState('');
@@ -35,17 +37,17 @@ function WorkingHabitsPage(){
      
 
         const result = await response.json(); // 等待JSON解析完，再往下一行
-        alert(result.message);
+        toast.current.show({
+          severity: 'success',
+          summary: '建立成功',
+          detail: result.message,
+          life: 3000
+        });
         } catch (error){
         console.error('錯誤:',error);
         }
       };
-      const type = [
-          { name: '完美主義者', code: 'perfectionist' },
-          { name: '夢想家', code: 'dreamer' },
-          { name: '杞人憂天者', code: 'worrier' },
-          { name: '死到臨頭', code: 'crisis-maker' },
-      ];
+
       const handleGetHabits = async () => {
         try{
           const response = await fetch(`http://localhost:5000/api/habits?user_id=${userId}`);
@@ -89,9 +91,9 @@ function WorkingHabitsPage(){
 return (
   <div>
     <Navbar />
-    
+    <Toast ref={toast} />
     <div style={{ padding: '10px' , marginLeft:"15%", backgroundColor:"#282c34",height:"100%", minHeight: '100vh', color:"white",}}>
-      <h2 style={{marginLeft:"2%",color:"#CCC"}}>個人做事習慣紀錄</h2>
+      <p style={{marginLeft:"2%",color:"#CCC",fontSize:"26px"}}>個人做事習慣紀錄</p>
       <div style={{display:"flex"}}>
         <div style={{ color:"white",marginLeft:"3%",marginTop:"5%",display:"inline-block"}}>
           
@@ -125,9 +127,53 @@ return (
             <option value="read/write">閱讀/寫作練習</option>
             <option value="active">動覺學習</option>
           </select><br/><br/>
-            <button onClick={handleCreatHabit} style={{backgroundColor:"#90a4ae00",border: "1px solid rgb(227, 227, 227)",width:"100px",height:"35px",color:"white",borderRadius:"3px",marginTop:"10px"}}>+ 建立習慣</button> &nbsp;
-            <button onClick={handleGetHabits} style={{backgroundColor:"#90a4ae00",border: "1px solid rgb(227, 227, 227)",width:"100px",height:"35px",color:"white",borderRadius:"3px",marginTop:"10px"}}>📚 取得習慣</button> &nbsp;
-            <button onClick={handleUpdateHabits} style={{backgroundColor:"#90a4ae00",border: "1px solid rgb(227, 227, 227)",width:"100px",height:"35px",color:"white",borderRadius:"3px",marginTop:"10px"}}>✏️ 更新習慣</button>
+          <button
+            onClick={handleCreatHabit}
+            style={{
+              backgroundColor: "#90a4ae00",
+              border: "1px solid rgb(227, 227, 227)",
+              width: "100px",
+              height: "35px",
+              color: "white",
+              borderRadius: "3px",
+              marginTop: "10px",
+              transition: "all 0.1s ease-in-out",
+            }}
+            onPointerDown={(e) => e.currentTarget.style.transform = 'scale(0.95)'}
+            onPointerUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          >
+            + 建立習慣
+          </button> &nbsp;
+          <button
+            onClick={handleCreatHabit}
+            style={{
+              backgroundColor: "#90a4ae00",
+              border: "1px solid rgb(227, 227, 227)",
+              width: "100px",
+              height: "35px",
+              color: "white",
+              borderRadius: "3px",
+              marginTop: "10px",
+              transition: "all 0.1s ease-in-out",
+            }}
+            onPointerDown={(e) => e.currentTarget.style.transform = 'scale(0.95)'}
+            onPointerUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          >📚 取得習慣</button> &nbsp;
+          <button
+            onClick={handleCreatHabit}
+            style={{
+              backgroundColor: "#90a4ae00",
+              border: "1px solid rgb(227, 227, 227)",
+              width: "100px",
+              height: "35px",
+              color: "white",
+              borderRadius: "3px",
+              marginTop: "10px",
+              transition: "all 0.1s ease-in-out",
+            }}
+            onPointerDown={(e) => e.currentTarget.style.transform = 'scale(0.95)'}
+            onPointerUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          >✏️ 更新習慣</button>
         </div>       
         <div style={{ color:"white",marginLeft:"2%",marginTop:"5%",display:"inline-block"}}>
             <label>額外補充 (Optional):</label><br/>

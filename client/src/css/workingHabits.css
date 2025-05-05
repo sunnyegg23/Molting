@@ -12,6 +12,20 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+button {
+  background-color:#90a4ae00;
+  border: 1px solid rgb(227, 227, 227);
+  width: 100px;
+  height:35px;
+  color: white;
+  border-radius: 3px;
+  margin-top: 10px;
+  transition: all 0.15s ease-in-out;
+}
+button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
 
 
 .App-link {

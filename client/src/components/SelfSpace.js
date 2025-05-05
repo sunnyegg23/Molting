@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
-import '../css/TaskOverview.css';
-import Navbar from '../components/Navbar'; // 路徑根據實際位置調整
+import react,{useState} from 'react';
+import Navbar from '../components/Navbar'; 
+import React, {  } from 'react';
 
-function SelfSpace() {
+function SelfSpace(){
 
-  return (
-    <div className="CalendarPage">
-      <Navbar />
-      <header className="Calender-header">
-        <div className="calendar-container">
-          
-        </div>
 
-      </header>
-
+return (
+  <div>
+    <Navbar />
+    <div style={{ padding: '10px' , marginLeft:"15%", backgroundColor:"#282c34",height:"100%", minHeight: '100vh', color:"white",}}>
+      <p style={{marginLeft:"2%",color:"#CCC",fontSize:"26px"}}>個人資料庫</p>
+ 
     </div>
-  );
+  </div>
+);
 
 }
-
 export default SelfSpace;
