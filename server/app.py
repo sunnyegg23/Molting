@@ -14,8 +14,9 @@ db = firestore.client()
 import requests
 import os
 from mistralai import Mistral
-os.environ["MISTRAL_API_KEY"] = "j7hdETzHa2fl3jUkujuueAfRhBsglW6l"
-api_key = os.environ["MISTRAL_API_KEY"]
+from dotenv import load_dotenv
+load_dotenv()
+api_key = os.getenv("MISTRAL_API_KEY")
 model = "open-mistral-7b"
 client = Mistral(api_key=api_key)
 
