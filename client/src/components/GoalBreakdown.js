@@ -1,11 +1,14 @@
+//GoalBreakdown.js
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import '../css/ArticleReminder.css';
 
-export default function ArticleReminder({ onClose }) {
+export default function GoalBreakdown({ onClose }) {
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
   const [mode, setMode] = useState('簡易');
   const [description, setDescription] = useState(''); // 新增描述字段
+    const navigate = useNavigate();
 
   const handleCreate = async () => {
     if (!name || !date || !mode || !description) { // 增加字段驗證
@@ -31,8 +34,10 @@ export default function ArticleReminder({ onClose }) {
       });
 
       if (res.ok) {
+          const data = await res.json();   // <--- 這裡接收後端回傳內容
         alert('建立成功！');
         onClose();
+        navigate(`/calendar/${data.id}`); // 跳轉到 CalenderPage，並帶上 ID
       } else {
         const err = await res.json();
         alert(`建立失敗：${err.error || res.status}`);

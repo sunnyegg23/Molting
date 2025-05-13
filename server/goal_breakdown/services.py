@@ -102,3 +102,116 @@ def create_goal_breakdown_service(user_id, data):
     except Exception as e:
         logging.error(f"Server Error: {str(e)}", exc_info=True)
         return {'error': f'伺服器錯誤: {str(e)}'}, 500
+
+
+
+def get_tasks_service(user_id, goal_id):
+    """取得特定目標分解下的所有任務"""
+    try:
+        db = firestore.client()
+
+        # 構建 tasks 子集合的參考路徑
+        tasks_ref = db.collection(f'users/{user_id}/goalBreakdown/{goal_id}/tasks')
+
+        # 執行查詢
+        docs = tasks_ref.stream()
+
+        # 轉換資料格式
+        tasks = []
+        for doc in docs:
+            task_data = doc.to_dict()
+
+            # 轉換 Firestore Timestamp 為 ISO 字串
+            if 'due_date' in task_data:
+                task_data['due_date'] = task_data['due_date'].isoformat()
+            if 'createdAt' in task_data:
+                task_data['createdAt'] = task_data['createdAt'].isoformat()
+
+            tasks.append({
+                'id': doc.id,
+                **task_data
+            })
+
+        return {'tasks': tasks}, 200
+
+    except Exception as e:
+        logging.error(f"Service Error: {str(e)}", exc_info=True)
+        return {'error': f'資料庫查詢失敗: {str(e)}'}, 500
+
+
+def get_all_goals_service(user_id):
+    """獲取用戶所有目標及其任務"""
+    try:
+        db = firestore.client()
+
+        # 獲取所有目標
+        goals_ref = db.collection(f'users/{user_id}/goalBreakdown')
+        goals_docs = goals_ref.stream()
+
+        goals = []
+        for doc in goals_docs:
+            goal_data = doc.to_dict()
+            goal_id = doc.id
+
+            # 轉換時間戳為ISO字符串
+            for field in ['eventDeadLine', 'createdAt']:
+                if field in goal_data and goal_data[field]:
+                    goal_data[field] = goal_data[field].isoformat()
+
+            # 獲取該目標下的所有任務
+            tasks_ref = db.collection(f'users/{user_id}/goalBreakdown/{goal_id}/tasks')
+            tasks_docs = tasks_ref.stream()
+
+            tasks = []
+            for task_doc in tasks_docs:
+                task_data = task_doc.to_dict()
+
+                # 轉換時間戳為ISO字符串
+                for field in ['due_date', 'createdAt']:
+                    if field in task_data and task_data[field]:
+                        task_data[field] = task_data[field].isoformat()
+
+                tasks.append({
+                    'id': task_doc.id,
+                    **task_data
+                })
+
+            # 將目標和任務合併
+            goals.append({
+                'id': goal_id,
+                **goal_data,
+                'tasks': tasks
+            })
+
+        return {'goals': goals}, 200
+
+    except Exception as e:
+        logging.error(f"Service Error: {str(e)}", exc_info=True)
+        return {'error': f'資料庫查詢失敗: {str(e)}'}, 500
+
+
+def get_goal_service(user_id, goal_id):
+    """獲取特定目標的詳細信息"""
+    try:
+        db = firestore.client()
+
+        # 獲取目標文檔
+        goal_doc = db.collection(f'users/{user_id}/goalBreakdown').document(goal_id).get()
+
+        if not goal_doc.exists:
+            return {'error': '目標不存在'}, 404
+
+        # 獲取數據
+        goal_data = goal_doc.to_dict()
+
+        # 轉換時間戳為ISO字符串
+        for field in ['eventDeadLine', 'createdAt']:
+            if field in goal_data and goal_data[field]:
+                goal_data[field] = goal_data[field].isoformat()
+
+        # 返回數據
+        return goal_data, 200
+
+    except Exception as e:
+        logging.error(f"Service Error: {str(e)}", exc_info=True)
+        return {'error': f'資料庫查詢失敗: {str(e)}'}, 500

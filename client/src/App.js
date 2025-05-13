@@ -13,6 +13,8 @@ function App() {
           <Route path="/WorkingHabitsPage" element={<WorkingHabitsPage />} />
           <Route path="/TaskOverview" element={<TaskOverview />} />
           <Route path="/SelfSpace" element={<SelfSpace />} />
+          <Route path="/calendar/:goalId" element={<CalendarPage />} />
+
         {/* 未來可在這裡加更多頁面 */}
       </Routes>
     </Router>

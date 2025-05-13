@@ -71,7 +71,7 @@ eventDescription: "{event_description}"
 
         # 呼叫 Mistral API
         response = client.chat.complete(
-            model="mistral-small-latest",
+            model="open-mistral-nemo",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
