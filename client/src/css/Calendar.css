@@ -8,7 +8,7 @@
 
 /* 內容容器 */
 .calendar-content {
-  padding: 20px;
+  padding: 10px;
   max-width: 1200px;
   margin: 0 auto;
   position: relative; /* 確保內部絕對定位元素相對於此容器 */
@@ -17,16 +17,16 @@
 /* 浮動菜單包裝器 */
 .floating-menu-wrapper {
   position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1050; /* 確保在所有元素之上 */
+  top: 45px;
+  right: 85px;
 }
 
 /* 頂部控制區 - 僅包含選擇器 */
 .top-controls {
-  margin-top: 60px; /* 增加頂部間距，避免與浮動菜單重疊 */
-  margin-bottom: 30px; /* 增加下方間距，改善與日曆的間隔 */
+  margin-top: 45px;
   width: 100%;
+  align-items: center;
+  margin-left: 19%;
 }
 
 /* 目標選擇器樣式調整 */

@@ -431,11 +431,12 @@ function CalendarPage() {
     return (
         <div className="CalendarPage">
             <Navbar/>
+            <div className="floating-menu-wrapper">
+                <FloatingMenu />
+            </div>
             <div className="calendar-content">
                 {/* 浮動菜單（含新增事務按鈕）- 放在右上角 */}
-                <div className="floating-menu-wrapper">
-                    <FloatingMenu />
-                </div>
+
 
                 {/* 頂部控制區 - 只保留選單 */}
                 <div className="top-controls">
