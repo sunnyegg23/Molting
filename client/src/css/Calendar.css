@@ -4,6 +4,7 @@
   min-height: 100vh;
   background-color: #282c34; /* 與左側導航欄相同的背景色 */
   color: white;
+  height: 10%;
 }
 
 /* 內容容器 */
@@ -162,6 +163,7 @@
   margin-right: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   color: #333;
+  
 }
 
 .upcoming-task-header {
@@ -248,7 +250,54 @@
 .error-container button:hover {
   background-color: #3d8bd8;
 }
+.scroller {
+  overflow: hidden;
+  width: 870px;
+  overflow-x: scroll;
+  white-space: nowrap;
 
+  &::-webkit-scrollbar {
+
+    width: 7px;
+
+  }
+
+  &::-webkit-scrollbar-button {
+
+    background: transparent;
+
+    border-radius: 4px;
+
+  }
+
+  &::-webkit-scrollbar-track-piece {
+
+    background: transparent;
+
+  }
+
+  &::-webkit-scrollbar-thumb {
+
+    border-radius: 4px;
+
+    background-color: rgba(134, 134, 134, 0.4);
+
+    border: 1px solid rgb(27, 25, 37);
+
+  }
+
+  &::-webkit-scrollbar-track {
+
+    box-shadow: transparent;
+
+  }
+}
+.scroller section {
+  margin-bottom: 5px;
+  display: inline-block;
+  scroll-snap-align: start;
+  white-space: normal;
+}
 /* 無任務狀態 */
 .no-tasks-container {
   text-align: center;

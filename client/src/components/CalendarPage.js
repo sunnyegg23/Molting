@@ -8,6 +8,7 @@ import '../css/Calendar.css';
 import Navbar from '../components/Navbar';
 import FloatingMenu from "./FloatingMenu";  // 確保引入 FloatingMenu
 
+
 function CalendarPage() {
     const {goalId} = useParams();
     const navigate = useNavigate();
@@ -503,15 +504,17 @@ function CalendarPage() {
                                                     <span
                                                         className={`task-status-badge status-${task.status}`}
                                                     >
-                                                        {task.status === 'pending' ? '待辦' :
-                                                         task.status === 'in-progress' ? '進行中' :
-                                                         task.status === 'completed' ? '已完成' :
-                                                         task.status === 'delayed' ? '延期' : task.status}
+                                                        {
+                                                        task.status === 'pending' ? '待辦' :
+                                                        task.status === 'in-progress' ? '進行中' :
+                                                        task.status === 'completed' ? '已完成' :
+                                                        task.status === 'delayed' ? '延期' : task.status}
                                                     </span>
                                                 </div>
                                                 <p className="task-priority">
-                                                    優先級: {task.priority === 'high' ? '高' :
-                                                             task.priority === 'medium' ? '中' : '低'}
+                                                    優先級: {
+                                                            task.priority === 'high' ? '高' :
+                                                            task.priority === 'medium' ? '中' : '低'}
                                                 </p>
                                             </div>
                                         ))}
@@ -524,7 +527,7 @@ function CalendarPage() {
                     {/* 任務輪播 */}
                     <div style={{marginTop: "20px"}}>
                         <h3 className="section-title">即將到來的任務</h3>
-                        <div className="task-carousel">
+                        <div className="scroller">
                             {allTasks.length === 0 ? (
                                 <div style={{padding: "10px"}}>
                                     <p>此目標尚無任務</p>
@@ -536,6 +539,7 @@ function CalendarPage() {
                                     .sort((a, b) => moment(a.date).diff(moment(b.date)))
                                     .slice(0, 10) // 限制顯示數量
                                     .map((task, index) => (
+                                        <section> 
                                         <div
                                             key={task.id || index}
                                             className={`upcoming-task-card border-priority-${task.priority}`}
@@ -546,9 +550,9 @@ function CalendarPage() {
                                                 </span>
                                                 <span className={`task-status-badge status-${task.status}`}>
                                                     {task.status === 'pending' ? '待辦' :
-                                                     task.status === 'in-progress' ? '進行中' :
-                                                     task.status === 'completed' ? '已完成' :
-                                                     task.status === 'delayed' ? '延期' : task.status}
+                                                    task.status === 'in-progress' ? '進行中' :
+                                                    task.status === 'completed' ? '已完成' :
+                                                    task.status === 'delayed' ? '延期' : task.status}
                                                 </span>
                                             </div>
                                             <p className="upcoming-task-date">
@@ -557,9 +561,10 @@ function CalendarPage() {
                                             <p className="upcoming-task-priority">
                                                 <span className={`priority-dot priority-dot-${task.priority}`}></span>
                                                 {task.priority === 'high' ? '高優先級' :
-                                                 task.priority === 'medium' ? '中優先級' : '低優先級'}
+                                                task.priority === 'medium' ? '中優先級' : '低優先級'}
                                             </p>
                                         </div>
+                                        </section>  
                                     ))
                             )}
                         </div>
