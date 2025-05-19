@@ -1,0 +1,536 @@
+/* Chatroom.css */
+.chatroom-container {
+    width: 350px;
+    height: 450px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: fixed; /* 改為 fixed 定位，相對於視窗 */
+    bottom: 80px;
+    right: 20px;
+    z-index: 9999; /* 提高 z-index 確保在最上層 */
+    border: 1px solid #e0e0e0;
+}
+
+.chatroom-header {
+    background-color: #4a5568;
+    color: white;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.chatroom-header h3 {
+    margin: 0;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+
+.messages-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #f9f9f9;
+}
+
+.message {
+    max-width: 75%;
+    padding: 10px 14px;
+    border-radius: 18px;
+    position: relative;
+    margin-bottom: 4px;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: #4a5568;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #e9e9eb;
+    color: #333;
+    border-bottom-left-radius: 4px;
+}
+
+.bot-message .message-content {
+    background-color: #e9e9eb;
+    color: #333;
+    word-break: break-word;
+}
+
+/* Markdown 格式支援 - 更新後的樣式 */
+.markdown-content {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+}
+
+.markdown-content p {
+    margin: 8px 0;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+    margin: 10px 0 5px 0;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #333;
+}
+
+.markdown-content h1 {
+    font-size: 1.4em;
+}
+
+.markdown-content h2 {
+    font-size: 1.3em;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.2em;
+    margin-top: 1em;
+}
+
+.markdown-content h3 {
+    font-size: 1.2em;
+}
+
+.markdown-content h4 {
+    font-size: 1.1em;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+    margin: 8px 0 8px 20px !important;
+    padding-left: 0 !important;
+}
+
+.markdown-content ul li,
+.markdown-content ol li {
+    margin: 4px 0 !important;
+    padding-left: 4px !important;
+    display: list-item !important;
+}
+
+.markdown-content ul {
+    list-style-type: disc !important;
+}
+
+.markdown-content ol {
+    list-style-type: decimal !important;
+}
+
+.markdown-content ul li ul,
+.markdown-content ol li ul {
+    list-style-type: circle !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.markdown-content strong {
+    font-weight: 600;
+}
+
+.markdown-content em {
+    font-style: italic;
+}
+
+.markdown-content code {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+.markdown-content blockquote {
+    margin: 0.5em 0;
+    padding-left: 1em;
+    border-left: 3px solid #ccc;
+    color: #666;
+}
+
+.message-time {
+    font-size: 10px;
+    margin-top: 4px;
+    opacity: 0.7;
+    text-align: right;
+}
+
+.message-input-container {
+    display: flex;
+    padding: 12px;
+    border-top: 1px solid #e0e0e0;
+    background-color: white;
+}
+
+.message-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    margin-right: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+.message-input:focus {
+    border-color: #4a5568;
+}
+
+.send-button {
+    background-color: #4a5568;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 0 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.send-button:hover {
+    background-color: #3a4050;
+}
+
+.send-button:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+}
+
+/* 打字指示器動畫 */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    padding: 6px 14px;
+    min-height: 24px;
+}
+
+.typing-indicator span {
+    height: 8px;
+    width: 8px;
+    float: left;
+    margin: 0 1px;
+    background-color: #9e9ea1;
+    display: block;
+    border-radius: 50%;
+    opacity: 0.4;
+}
+
+.typing-indicator span:nth-of-type(1) {
+    animation: typing 1s infinite 0s;
+}
+
+.typing-indicator span:nth-of-type(2) {
+    animation: typing 1s infinite 0.25s;
+}
+
+.typing-indicator span:nth-of-type(3) {
+    animation: typing 1s infinite 0.5s;
+}
+
+@keyframes typing {
+    0% {
+        transform: translateY(0px);
+    }
+    33% {
+        transform: translateY(-5px);
+    }
+    66% {
+        transform: translateY(0px);
+    }
+}
+
+/* 聊天按鈕樣式 */
+.chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #4a5568;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    z-index: 9998; /* 提高 z-index，但略低於聊天室 */
+    transition: all 0.3s;
+    border: none;
+}
+
+.chat-button:hover {
+    transform: scale(1.1);
+    background-color: #3a4050;
+}
+
+.chat-button svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
+
+/* 按鈕出現動畫 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chat-button {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.chatroom-container {
+    animation: fadeIn 0.3s ease-out;
+}/* Chatroom.css */
+.chatroom-container {
+    width: 350px;
+    height: 450px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: fixed; /* 改為 fixed 定位，相對於視窗 */
+    bottom: 80px;
+    right: 20px;
+    z-index: 9999; /* 提高 z-index 確保在最上層 */
+    border: 1px solid #e0e0e0;
+}
+
+.chatroom-header {
+    background-color: #4a5568;
+    color: white;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.chatroom-header h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+
+.messages-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #f9f9f9;
+}
+
+.message {
+    max-width: 75%;
+    padding: 10px 14px;
+    border-radius: 18px;
+    position: relative;
+    margin-bottom: 4px;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: #4a5568;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #e9e9eb;
+    color: #333;
+    border-bottom-left-radius: 4px;
+}
+
+.message-content {
+    word-break: break-word;
+}
+
+.message-time {
+    font-size: 10px;
+    margin-top: 4px;
+    opacity: 0.7;
+    text-align: right;
+}
+
+.message-input-container {
+    display: flex;
+    padding: 12px;
+    border-top: 1px solid #e0e0e0;
+    background-color: white;
+}
+
+.message-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    margin-right: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+.message-input:focus {
+    border-color: #4a5568;
+}
+
+.send-button {
+    background-color: #4a5568;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 0 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.send-button:hover {
+    background-color: #3a4050;
+}
+
+.send-button:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+}
+
+/* 打字指示器動畫 */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    padding: 6px 14px;
+    min-height: 24px;
+}
+
+.typing-indicator span {
+    height: 8px;
+    width: 8px;
+    float: left;
+    margin: 0 1px;
+    background-color: #9e9ea1;
+    display: block;
+    border-radius: 50%;
+    opacity: 0.4;
+}
+
+.typing-indicator span:nth-of-type(1) {
+    animation: typing 1s infinite 0s;
+}
+
+.typing-indicator span:nth-of-type(2) {
+    animation: typing 1s infinite 0.25s;
+}
+
+.typing-indicator span:nth-of-type(3) {
+    animation: typing 1s infinite 0.5s;
+}
+
+@keyframes typing {
+    0% {
+        transform: translateY(0px);
+    }
+    33% {
+        transform: translateY(-5px);
+    }
+    66% {
+        transform: translateY(0px);
+    }
+}
+
+/* 聊天按鈕樣式 */
+.chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #4a5568;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    z-index: 9998; /* 提高 z-index，但略低於聊天室 */
+    transition: all 0.3s;
+    border: none;
+}
+
+.chat-button:hover {
+    transform: scale(1.1);
+    background-color: #3a4050;
+}
+
+.chat-button svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
+
+/* 按鈕出現動畫 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chat-button {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.chatroom-container {
+    animation: fadeIn 0.3s ease-out;
+}
