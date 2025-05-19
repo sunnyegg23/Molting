@@ -1,4 +1,4 @@
-// CalendarPage.js
+// 修改後的CalendarPage.js
 import React, {useState, useEffect, useRef} from 'react';
 import {Calendar} from 'primereact/calendar';
 import {useParams, useNavigate} from 'react-router-dom';
@@ -6,8 +6,8 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import moment from 'moment';
 import '../css/Calendar.css';
 import Navbar from '../components/Navbar';
-import FloatingMenu from "./FloatingMenu";  // 確保引入 FloatingMenu
-
+import FloatingMenu from "./FloatingMenu";
+import Chatroom from './Chatroom';  // 引入Chatroom組件
 
 function CalendarPage() {
     const {goalId} = useParams();
@@ -24,6 +24,8 @@ function CalendarPage() {
         apiCalls: [],
         responseData: null
     });
+    // 添加聊天室狀態
+    const [isChatOpen, setIsChatOpen] = useState(false);
 
     // 用於防止循環請求的標誌
     const isInitialLoad = useRef(true);
@@ -334,6 +336,11 @@ function CalendarPage() {
         }
     };
 
+    // 切換聊天室開關
+    const toggleChat = () => {
+        setIsChatOpen(!isChatOpen);
+    };
+
     const formattedDate = moment(date).format("YYYY-MM-DD");
     const todayTasks = tasksByDate[formattedDate] || [];
 
@@ -423,6 +430,8 @@ function CalendarPage() {
                             </details>
                         </div>
                     </div>
+
+                    {/* 移除這裡的聊天按鈕和聊天室，放到外層了 */}
                 </div>
             </div>
         );
@@ -436,9 +445,6 @@ function CalendarPage() {
                 <FloatingMenu />
             </div>
             <div className="calendar-content">
-                {/* 浮動菜單（含新增事務按鈕）- 放在右上角 */}
-
-
                 {/* 頂部控制區 - 只保留選單 */}
                 <div className="top-controls">
                     {/* 目標選擇器 */}
@@ -458,8 +464,6 @@ function CalendarPage() {
                         </div>
                     )}
                 </div>
-
-                {/* 移除目標信息區域 */}
 
                 {/* 日曆容器 */}
                 <div className="calendar-container">
@@ -539,7 +543,7 @@ function CalendarPage() {
                                     .sort((a, b) => moment(a.date).diff(moment(b.date)))
                                     .slice(0, 10) // 限制顯示數量
                                     .map((task, index) => (
-                                        <section> 
+                                        <section key={index}>
                                         <div
                                             key={task.id || index}
                                             className={`upcoming-task-card border-priority-${task.priority}`}
@@ -564,13 +568,26 @@ function CalendarPage() {
                                                 task.priority === 'medium' ? '中優先級' : '低優先級'}
                                             </p>
                                         </div>
-                                        </section>  
+                                        </section>
                                     ))
                             )}
                         </div>
                     </div>
                 </div>
+
+                {/* 聊天按鈕和聊天室 - 移至 CalendarPage 的最外層，確保定位正確 */}
             </div>
+
+            {/* 聊天按鈕 */}
+            <button className="chat-button" onClick={toggleChat}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" fill="white"/>
+                    <path d="M7 9h10M7 12h7" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+            </button>
+
+            {/* 聊天室 */}
+            {isChatOpen && <Chatroom onClose={toggleChat} goalInfo={goalInfo} />}
         </div>
     );
 }

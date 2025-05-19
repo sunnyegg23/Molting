@@ -3,6 +3,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import logging
 
 # 第一步：初始化 Firebase
 cred = credentials.Certificate("molting-llm-firebase-adminsdk-fbsvc-f5642adbc4.json")
@@ -21,16 +22,25 @@ model = "open-mistral-7b"
 client = Mistral(api_key=api_key)
 
 # ====test====
+# 配置日誌
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 
 # 第二步：初始化 Flask
 app = Flask(__name__)
 CORS(app)
 
 # 第三步：導入藍圖（此時 Firebase 已初始化）
+
 from article_reminder.routes import article_bp
 from goal_breakdown.routes import breakdown_bp
+from chat_bot.routes import chat_bp
 app.register_blueprint(article_bp, url_prefix='/api')
 app.register_blueprint(breakdown_bp, url_prefix='/api')
+app.register_blueprint(chat_bp, url_prefix='/api')
+
 
 @app.route('/api/habits',methods=['POST'])
 def create_habits():
