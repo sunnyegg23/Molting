@@ -37,10 +37,11 @@ CORS(app)
 from article_reminder.routes import article_bp
 from goal_breakdown.routes import breakdown_bp
 from chat_bot.routes import chat_bp
+# from learning_resource.routes import resource_bp
 app.register_blueprint(article_bp, url_prefix='/api')
 app.register_blueprint(breakdown_bp, url_prefix='/api')
 app.register_blueprint(chat_bp, url_prefix='/api')
-
+# app.register_blueprint(resource_bp, url_prefix='/api')
 
 @app.route('/api/habits',methods=['POST'])
 def create_habits():

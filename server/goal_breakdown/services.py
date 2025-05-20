@@ -2,6 +2,7 @@
 from datetime import datetime
 from firebase_admin import firestore
 from llm_model.llm_services import generate_structured_output
+from llm_server.google_search import get_learning_links_from_google
 import logging
 
 
@@ -29,6 +30,7 @@ def create_goal_breakdown_service(user_id, data):
         # 階段 1：強化驗證
         validate_goal_data(data)
 
+
         # 階段 2：呼叫 LLM 生成任務
         llm_response = generate_structured_output(
             event_name=data['eventName'],
@@ -36,7 +38,10 @@ def create_goal_breakdown_service(user_id, data):
             created_at=created_at,  # 傳入創建時間
             event_description=data['eventDescription']
         )
-
+        
+        # 使用 eventName + eventDescription 組成搜尋查詢
+        query = f"{data['eventName']} {data['eventDescription']}"
+        learning_links = get_learning_links_from_google(query, max_results=3)
         # 處理 LLM 錯誤
         if 'error' in llm_response:
             logging.error(f"LLM Error: {llm_response['error']}")
@@ -46,6 +51,7 @@ def create_goal_breakdown_service(user_id, data):
         db = firestore.client()
         batch = db.batch()
 
+
         # 建立主文檔
         main_doc_ref = db.collection(f'users/{user_id}/goalBreakdown').document()
         main_data = {
@@ -54,7 +60,8 @@ def create_goal_breakdown_service(user_id, data):
             'eventMode': data['eventMode'],
             'eventDescription': data['eventDescription'],
             'createdAt': firestore.SERVER_TIMESTAMP,
-            'totalTasks': len(llm_response.get('tasks', []))
+            'totalTasks': len(llm_response.get('tasks', [])),
+            "learningLinks":learning_links
         }
         batch.set(main_doc_ref, main_data)
 
