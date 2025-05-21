@@ -100,7 +100,8 @@ def create_goal_breakdown_service(user_id, data):
         return {
             'id': main_doc_ref.id,
             'taskCount': len(tasks),
-            'firstTaskDue': tasks[0]['due_date'] if tasks else None
+            'firstTaskDue': tasks[0]['due_date'] if tasks else None,
+            'learningLinks': learning_links
         }, 201
 
     except ValueError as e:
