@@ -87,6 +87,7 @@ eventDescription: "{event_description}"
             task_date = datetime.strptime(task['due_date'], "%Y-%m-%d").date()
             if not (created_date <= task_date <= deadline_date):
                 raise ValueError(f"任務 '{task['task_name']}' 的日期超出有效範圍")
+            
 
         return result
 
