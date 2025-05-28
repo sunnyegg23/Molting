@@ -95,3 +95,28 @@ eventDescription: "{event_description}"
         return {"error": f"JSON 解析失敗: {str(e)}"}
     except Exception as e:
         return {"error": f"API 呼叫失敗: {str(e)}"}
+
+def generate_tasks_for_habit_building(habit_name: str, frequency: str, intensity: str, created_at: datetime, deadline: str) -> dict:
+    """
+    專門為習慣養成拆解每日任務的函式。
+    
+    :param habit_name: 習慣名稱，例如「喝水2000ml」
+    :param frequency: 頻率 (low, medium, high)
+    :param intensity: 強度 (low, medium, high)
+    :param created_at: 習慣建立時間 datetime 物件
+    :param deadline: 任務拆解截止日期 字串，格式 'YYYY-MM-DD'
+    :return: 拆解後的任務字典，格式同 generate_structured_output
+    """
+    event_description = (
+        f"請協助我把習慣「{habit_name}」拆解成每天的小任務。"
+        f"此習慣頻率為 {frequency}，強度為 {intensity}。"
+        "任務需要每天分配，幫助我持續養成這個習慣。"
+    )
+    
+    # 直接呼叫通用的 generate_structured_output
+    return generate_structured_output(
+        event_name=habit_name,
+        event_deadline=deadline,
+        created_at=created_at,
+        event_description=event_description
+    )
