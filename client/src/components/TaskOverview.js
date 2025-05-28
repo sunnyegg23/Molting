@@ -277,9 +277,10 @@ function TaskOverview() {
     return (
         <div className="CalendarPage">
         <Navbar />
-        <div style={{ padding: '10px', marginLeft: "15%", backgroundColor: "#282c34", minHeight: '100vh', color: "white" }}>
+        <div style={{ padding: '10px', marginLeft: "15%", minHeight: '100vh', color: "white"}}>
             <p style={{ marginLeft: "2%", color: "#CCC", fontSize: "26px" }}>事務總覽</p>
 
+            
             <div className="scrollable-goal-list" style={{
                 marginLeft: '2%',
                 paddingRight: '10px',
@@ -288,8 +289,8 @@ function TaskOverview() {
                 gap: '15px' // 卡片之間的間距
                 }}>
                 {allGoals.length === 0 ? (
-                    <div style={{ backgroundColor: '#282c34', margin: '10px 0', padding: '10px', borderRadius: '5px' }}>
-                    <p>目前沒有任務喔～</p>
+                    <div style={{ margin: '10px 0', padding: '10px', borderRadius: '5px' }}>
+                    <p>載入中～</p>
                     </div>
                 ) : (
                 allGoals.map(goal => {
@@ -298,11 +299,12 @@ function TaskOverview() {
                 const progress = tasks.length === 0 ? 0 : Math.round((completed / tasks.length) * 100);
 
                 return (
+                    
                     <div
                     key={goal.id}
                     onClick={() => navigate(`/GoalDetail/${goal.id}`)}
                     style={{
-                        backgroundColor: '#2D3239',
+                        backgroundColor: 'rgba(45, 50, 57, 0.5)',
                         padding: '10px',
                         borderRadius: '3px',
                         flex: '0 0 calc(25% - 15px)',

@@ -93,7 +93,7 @@ function GoalDetail() {
         return (
         <div className="CalendarPage">
             <Navbar />
-            <div style={{ padding: '10px', marginLeft: "15%", backgroundColor: "#282c34", minHeight: '100vh', color: "white" }}>
+            <div style={{ padding: '10px', marginLeft: "15%", color: "white" }}>
             <p style={{ color: "#f88" }}>⚠️ {error}</p>
             </div>
         </div>
@@ -105,7 +105,7 @@ function GoalDetail() {
         return (
         <div className="CalendarPage">
             <Navbar />
-            <div style={{ padding: '10px', marginLeft: "15%", backgroundColor: "#282c34", minHeight: '100vh', color: "white" }}>
+            <div  style={{ padding: '10px', marginLeft: "15%", color: "white" }}>
             <p>載入中...</p>
             </div>
         </div>
@@ -117,7 +117,7 @@ function GoalDetail() {
     return (
         <div className="CalendarPage">
         <Navbar />
-        <div style={{ padding: '10px', marginLeft: "15%", backgroundColor: "#282c34", minHeight: '100vh', color: "white" }}>
+        <div style={{ padding: '10px', marginLeft: "15%", color: "white" }}>
             <button style={{background:'transparent',border:"none", color:"white",fontSize:"20px",marginLeft:"1%", marginTop:"1%"}} onClick={() => navigate(`/TaskOverview`)} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>↼返回</button>
         <div style={{marginLeft:"3%"}}>
             <h2>目標詳情   ⚙</h2>

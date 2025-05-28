@@ -1,5 +1,5 @@
 .Calender-header {
-    background-color: #282c34;
+    position: fixed;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -35,7 +35,9 @@
     color: #ffffff;
   }
 
-  .scrollable-goal-list {
+.scrollable-goal-list {
+  height: 85vh;
+  overflow-y: auto;  
   scrollbar-width: thin;
   scrollbar-color: gray transparent; /* 滑動條是灰色，背景透明 */
 }
