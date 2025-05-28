@@ -1,5 +1,5 @@
 .navbar {
-    position: absolute;
+    position: fixed;
     left: 0;
     width: 15%;
     min-Height: 100vh;

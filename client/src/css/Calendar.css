@@ -2,7 +2,7 @@
 /* Calendar.css*/
 .CalendarPage {
   min-height: 100vh;
-  background-color: #282c34; /* 與左側導航欄相同的背景色 */
+  background:linear-gradient(180deg, #282c34, #282c34 , #296778) ; /* 與左側導航欄相同的背景色 */
   color: white;
   height: 10%;
 }
