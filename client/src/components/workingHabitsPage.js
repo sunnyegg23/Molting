@@ -89,13 +89,13 @@ function WorkingHabitsPage(){
 
 
 return (
-  <div>
+  <div className='CalendarPage'>
     <Navbar />
     <Toast ref={toast} />
-    <div style={{ padding: '10px' , marginLeft:"15%", backgroundColor:"#282c34",height:"100%", minHeight: '100vh', color:"white",}}>
+    <div style={{ padding: '10px' , marginLeft:"15%",height:"100%", minHeight: '100vh', color:"white",}}>
       <p style={{marginLeft:"2%",color:"#CCC",fontSize:"26px"}}>個人做事習慣紀錄</p>
       <div style={{display:"flex"}}>
-        <div style={{ color:"white",marginLeft:"3%",marginTop:"5%",display:"inline-block"}}>
+        <div style={{ color:"white",marginLeft:"3%",marginTop:"2%",display:"inline-block"}}>
           
 
           <label>使用者 ID:</label><br/>

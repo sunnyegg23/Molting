@@ -4,6 +4,7 @@ import CalendarPage from './components/CalendarPage';
 import WorkingHabitsPage from "./components/workingHabitsPage";
 import TaskOverview from "./components/TaskOverview";
 import SelfSpace from "./components/SelfSpace";
+import GoalDetail from './components/GoalDetail';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <Route path="/TaskOverview" element={<TaskOverview />} />
           <Route path="/SelfSpace" element={<SelfSpace />} />
           <Route path="/calendar/:goalId" element={<CalendarPage />} />
-
+          <Route path="/GoalDetail/:goalId" element={<GoalDetail />} />
         {/* 未來可在這裡加更多頁面 */}
       </Routes>
     </Router>

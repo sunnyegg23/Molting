@@ -1,11 +1,70 @@
 /* 整體頁面樣式 */
 /* Calendar.css*/
 .CalendarPage {
+  position: fixed;
   min-height: 100vh;
-  background-color: #282c34; /* 與左側導航欄相同的背景色 */
+  background: linear-gradient(
+    120deg,
+    #8a57b7,
+    #dec486,
+    #5baca5,
+    #6b78aa
+  );
+  background-size: 300% 300%;
+  animation: gradientAnimation 15s ease infinite;
   color: white;
-  height: 10%;
+  position: relative;
+  overflow: hidden;
 }
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.CalendarPage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #282c34 0%,
+    #282c34 50%,
+    #282c34ef 60%,
+    #282c34d2 70%,
+    #282c349f 80%,
+    rgba(0, 0, 0, 0) 85%
+  );
+  background-size: 100% 200%;
+  animation: darkOverlayFloat 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes darkOverlayFloat {
+  0% {
+    background-position: 0% 40%;
+  }
+  50% {
+    background-position: 0% 60%;
+  }
+  100% {
+    background-position: 0% 40%;
+  }
+}
+
+.CalendarPage > * {
+  position: relative;
+  z-index: 1;
+}
+
 
 /* 內容容器 */
 .calendar-content {
@@ -280,9 +339,8 @@
 
     border-radius: 4px;
 
-    background-color: rgba(134, 134, 134, 0.4);
+    background-color: rgba(255, 255, 255, 0.459);
 
-    border: 1px solid rgb(27, 25, 37);
 
   }
 
