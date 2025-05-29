@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../css/FloatingMenu.css';
 import ArticleReminder from './ArticleReminder';
 import GoalBreakdown from './GoalBreakdown'
+import HabitsBuilding from './HabitsBuilding';
 
 export default function FloatingMenu() {
   const [open, setOpen] = useState(false);
@@ -53,6 +54,11 @@ export default function FloatingMenu() {
       {/* 目標規劃、習慣養成頁面可依需求再加 */}
       {open && currentPage === 'goal' && (
         <GoalBreakdown onClose={() => setCurrentPage(null)} />
+      )}
+
+        {/*  習慣養成頁面 */}
+      {open && currentPage === 'habit' && (
+        <HabitsBuilding onClose={() => setCurrentPage(null)} />
       )}
     </div>
   );
