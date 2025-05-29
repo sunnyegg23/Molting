@@ -1,0 +1,87 @@
+.habits-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  background: rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.habits-container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  padding: 48px 32px 100px 32px;
+  min-width: 600px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.habits-close-btn {
+  position: absolute;
+  top: 24px;
+  left: 32px;
+  background: transparent;
+  border: none;
+  font-size: 56px;
+  color: #A0A8AA;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.habits-header {
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.habits-title {
+  font-size: 24px;
+  color: #757575;
+  min-width: 80px;
+}
+
+.habits-input {
+  font-size: 22px;
+  padding: 8px 16px;
+  border: 1.5px solid #B0BEC5;
+  border-radius: 8px;
+  width: 260px;
+  color: #757575;
+}
+
+.habits-row {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.habits-desc {
+  margin-top: 32px;
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
+}
+
+.habits-create-btn {
+  position: absolute;
+  right: 32px;
+  bottom: 32px;
+  width: 120px;
+  height: 56px;
+  background: #B0BEC5;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  letter-spacing: 8px;
+}
