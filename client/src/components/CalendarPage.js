@@ -404,12 +404,13 @@ function CalendarPage() {
     if (allGoals.length === 0 && !goalInfo) {
         return (
             <div className="CalendarPage">
-                <Navbar/>
+                <Navbar/>                    
+                <div className="floating-menu-wrapper">
+                    <FloatingMenu />
+                </div>
                 <div className="calendar-content">
                     {/* 浮動菜單 */}
-                    <div className="floating-menu-wrapper">
-                        <FloatingMenu />
-                    </div>
+
 
                     <div className="no-tasks-container">
                         <p>您目前沒有任何目標。</p>
@@ -441,12 +442,13 @@ function CalendarPage() {
     return (
         <div className="CalendarPage">
             <Navbar/>
-            <div className="floating-menu-wrapper">
-                <FloatingMenu />
-            </div>
+
             <div className="calendar-content">
                 {/* 頂部控制區 - 只保留選單 */}
-                <div className="top-controls">
+                <div className="top-controls"> 
+                <div className="floating-menu-wrapper">
+                <   FloatingMenu />
+                </div>
                     {/* 目標選擇器 */}
                     {allGoals.length > 0 && (
                         <div className="goal-selector">

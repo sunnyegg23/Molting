@@ -119,109 +119,111 @@ function GoalDetail() {
         <Navbar />
         <div style={{ padding: '10px', marginLeft: "15%", color: "white" }}>
             <button style={{background:'transparent',border:"none", color:"white",fontSize:"20px",marginLeft:"1%", marginTop:"1%"}} onClick={() => navigate(`/TaskOverview`)} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>↼返回</button>
-        <div style={{marginLeft:"3%"}}>
-            <h2>目標詳情   ⚙</h2>
+        <div className="scrollable-goal-list">
+            <div style={{marginLeft:"3%"}}>
+                <h2>目標詳情   ⚙</h2>
 
-            <p><strong>名稱：</strong>{goal.eventName}</p>
-            <p><strong>截止日期：</strong>{moment(goal.eventDeadLine).format('YYYY-MM-DD')}</p>
-            <p><strong>任務總數：</strong>{tasks.length}</p> 
-            <p><strong>目前進度：</strong></p>       
-            {tasks.length === 0 ? (
-                        <p style={{ fontSize: '12px', color: '#aaa' }}>目前無任務</p>
-                    ) : (
-                        <>
-                        <div style={{
-                            marginTop: '10px',
-                            backgroundColor: '#555',
-                            borderRadius: '4px',
-                            height: '10px',
-                            width: '30%'
-                        }}>
+                <p><strong>名稱：</strong>{goal.eventName}</p>
+                <p><strong>截止日期：</strong>{moment(goal.eventDeadLine).format('YYYY-MM-DD')}</p>
+                <p><strong>任務總數：</strong>{tasks.length}</p> 
+                <p><strong>目前進度：</strong></p>       
+                {tasks.length === 0 ? (
+                            <p style={{ fontSize: '12px', color: '#aaa' }}>目前無任務</p>
+                        ) : (
+                            <>
                             <div style={{
-                            width: `${progress}%`,
-                            height: '100%',
-                            backgroundColor: '#4caf50',
-                            borderRadius: '4px',
-                            transition: 'width 0.3s ease-in-out'
-                            }} />
-                        </div>
-                        <p style={{ fontSize: '12px', marginTop: '5px', color: '#aaa' }}>{progress}% 已完成</p>
-                        </>
-                    )}
-            </div>
-        <div style={{ marginTop: '20px',borderTop:"1px solid rgb(168, 168, 168)"}}><h3 style={{marginLeft:"3%"}}>任務列表：</h3></div>
-        {tasks.length === 0 ? (
-            <p>目前沒有任務喔～</p>
-            ) : (
-            <ul>
-                <div  style={{
-                paddingRight: '10px',
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '15px' // 卡片之間的間距
-                }}>
-                    {allTasks.length === 0 ? (
-                    <div style={{padding: "10px"}}>
-                        <p>此目標尚無任務</p>
-                    </div>
-                    ) : (
-                    // 按日期排序並只顯示未來的任務
-                    allTasks
-                    .filter(task => moment(task.date).isSameOrAfter(moment(), 'day'))
-                    .sort((a, b) => moment(a.date).diff(moment(b.date)))
-                    .slice(0, 10) // 限制顯示數量
-                    .map((task, index) => (
-                    <section key={index}>
-                    <div
-                        key={task.id || index}
-                        className={`upcoming-task-card border-priority-${task.priority}`}
-                    >
-                        <div className="upcoming-task-header">
-                            <span className="upcoming-task-title">
-                                {task.taskName}
-                            </span>
-                            <span className={`task-status-badge status-${task.status}`}>
-                                {task.status === 'pending' ? '待辦' :
-                                task.status === 'in-progress' ? '進行中' :
-                                task.status === 'completed' ? '已完成' :
-                                task.status === 'delayed' ? '延期' : task.status}
-                            </span>
-                        </div>
-                        <p className="upcoming-task-date">
-                            期限: {moment(task.date).format("MM/DD")}
-                        </p>
-                        <p className="upcoming-task-priority">
-                            <span className={`priority-dot priority-dot-${task.priority}`}></span>
-                            {task.priority === 'high' ? '高優先級' :
-                            task.priority === 'medium' ? '中優先級' : '低優先級'}
-                        </p>
-                    </div>
-                    </section>
-                    ))
-                    )}
-                    </div>
-            </ul>
-            )}
-            <div style={{ marginTop: '30px',borderTop:"1px solid rgb(168, 168, 168)"}}><h3 style={{marginLeft:"3%"}}>相關資料：</h3></div>
-            <div style={{ marginTop: '10px', marginLeft: "3%" }}>
-                {Array.isArray(goal.learningLinks) && goal.learningLinks.length > 0 ? (
-                <ul>
-                    {goal.learningLinks.map((item, index) => (
-                    <li key={index} style={{ marginBottom: '6px' }}>
-                        <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: '#4fc3f7', textDecoration: 'underline' }}
-                        >
-                        🔗 {item.title || `相關連結 ${index + 1}`}
-                        </a>
-                    </li>
-                    ))}
-                </ul>
+                                marginTop: '10px',
+                                backgroundColor: '#555',
+                                borderRadius: '4px',
+                                height: '10px',
+                                width: '30%'
+                            }}>
+                                <div style={{
+                                width: `${progress}%`,
+                                height: '100%',
+                                backgroundColor: '#4caf50',
+                                borderRadius: '4px',
+                                transition: 'width 0.3s ease-in-out'
+                                }} />
+                            </div>
+                            <p style={{ fontSize: '12px', marginTop: '5px', color: '#aaa' }}>{progress}% 已完成</p>
+                            </>
+                        )}
+                </div>
+            <div style={{ marginTop: '20px',borderTop:"1px solid rgb(168, 168, 168)"}}><h3 style={{marginLeft:"3%"}}>任務列表：</h3></div>
+            {tasks.length === 0 ? (
+                <p>目前沒有任務喔～</p>
                 ) : (
-                <p style={{ color: '#aaa' }}>尚未提供相關學習連結</p>
+                <ul>
+                    <div  style={{
+                    paddingRight: '10px',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '15px' // 卡片之間的間距
+                    }}>
+                        {allTasks.length === 0 ? (
+                        <div style={{padding: "10px"}}>
+                            <p>此目標尚無任務</p>
+                        </div>
+                        ) : (
+                        // 按日期排序並只顯示未來的任務
+                        allTasks
+                        .filter(task => moment(task.date).isSameOrAfter(moment(), 'day'))
+                        .sort((a, b) => moment(a.date).diff(moment(b.date)))
+                        .slice(0, 10) // 限制顯示數量
+                        .map((task, index) => (
+                        <section key={index}>
+                        <div
+                            key={task.id || index}
+                            className={`upcoming-task-card border-priority-${task.priority}`}
+                        >
+                            <div className="upcoming-task-header">
+                                <span className="upcoming-task-title">
+                                    {task.taskName}
+                                </span>
+                                <span className={`task-status-badge status-${task.status}`}>
+                                    {task.status === 'pending' ? '待辦' :
+                                    task.status === 'in-progress' ? '進行中' :
+                                    task.status === 'completed' ? '已完成' :
+                                    task.status === 'delayed' ? '延期' : task.status}
+                                </span>
+                            </div>
+                            <p className="upcoming-task-date">
+                                期限: {moment(task.date).format("MM/DD")}
+                            </p>
+                            <p className="upcoming-task-priority">
+                                <span className={`priority-dot priority-dot-${task.priority}`}></span>
+                                {task.priority === 'high' ? '高優先級' :
+                                task.priority === 'medium' ? '中優先級' : '低優先級'}
+                            </p>
+                        </div>
+                        </section>
+                        ))
+                        )}
+                        </div>
+                </ul>
                 )}
+                <div style={{ marginTop: '30px',borderTop:"1px solid rgb(168, 168, 168)"}}><h3 style={{marginLeft:"3%"}}>相關資料：</h3></div>
+                <div style={{ marginTop: '10px', marginLeft: "3%" }}>
+                    {Array.isArray(goal.learningLinks) && goal.learningLinks.length > 0 ? (
+                    <ul>
+                        {goal.learningLinks.map((item, index) => (
+                        <li key={index} style={{ marginBottom: '6px' }}>
+                            <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ color: '#4fc3f7', textDecoration: 'underline' }}
+                            >
+                            🔗 {item.title || `相關連結 ${index + 1}`}
+                            </a>
+                        </li>
+                        ))}
+                    </ul>
+                    ) : (
+                    <p style={{ color: '#aaa' }}>尚未提供相關學習連結</p>
+                    )}
+                </div>
             </div>
         </div>
         </div>

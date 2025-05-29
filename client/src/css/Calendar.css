@@ -78,7 +78,7 @@
 .floating-menu-wrapper {
   position: absolute;
   top: 45px;
-  right: 85px;
+  left: 100%;
 }
 
 /* 頂部控制區 - 僅包含選擇器 */
