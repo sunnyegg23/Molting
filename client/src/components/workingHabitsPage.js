@@ -203,7 +203,7 @@ function WorkingHabitsPage(){
 
           </div>
           {habitData && (
-                <div style={{ marginTop: '30px', marginLeft: '3%', color: 'white', backgroundColor: '#444', padding: '10px', borderRadius: '5px', maxWidth: '600px' }}>
+                <div style={{ marginTop: '30px', marginLeft: '3%', color: 'white', backgroundColor: 'rgba(51, 49, 56, 0.32)', padding: '10px', borderRadius: '5px', maxWidth: '600px' }}>
                   <h3>已取得的習慣資料：</h3>
                   <pre style={{ whiteSpace: 'pre-wrap' }}>
                     {JSON.stringify(habitData, null, 2)}

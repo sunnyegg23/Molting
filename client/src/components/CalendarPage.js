@@ -311,6 +311,29 @@ function CalendarPage() {
         }
     };
 
+    //修改status
+    const updateTaskStatus = async (userId, goalId, taskId, newStatus) => {
+        const url = `${API_BASE_URL}/users/${userId}/goal_breakdown/${goalId}/tasks/${taskId}`;
+        try {
+            const response = await fetch(url, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus })
+            });
+
+            const result = await response.json();
+            if (!response.ok) {
+                throw new Error(result.error || '更新失敗');
+            }
+
+            console.log('狀態更新成功', result);
+            return true;
+        } catch (error) {
+            console.error('更新任務狀態錯誤:', error.message);
+            alert(`更新任務狀態失敗：${error.message}`);
+            return false;
+        }
+    };
     // 測試API連接
     const testApiConnection = async () => {
         try {
@@ -505,6 +528,26 @@ function CalendarPage() {
                                             <div
                                                 key={task.id || idx}
                                                 className={`task-card priority-${task.priority}`}
+                                                onClick={async () => {
+                                                    const newStatus = task.status === 'completed' ? 'pending' : 'completed';
+
+                                                    const success = await updateTaskStatus("user123", selectedGoalId, task.id, newStatus);
+                                                    if (success) {
+                                                        // 更新本地任務狀態
+                                                        const updatedTasks = allTasks.map(t =>
+                                                            t.id === task.id ? { ...t, status: newStatus } : t
+                                                        );
+                                                        const updatedByDate = { ...tasksByDate };
+                                                        if (updatedByDate[task.date]) {
+                                                            updatedByDate[task.date] = updatedByDate[task.date].map(t =>
+                                                                t.id === task.id ? { ...t, status: newStatus } : t
+                                                            );
+                                                        }
+                                                        setAllTasks(updatedTasks);
+                                                        setTasksByDate(updatedByDate);
+                                                    }
+                                                }}
+
                                             >
                                                 <div className="task-card-header">
                                                     <p className="task-card-title">{task.name}</p>

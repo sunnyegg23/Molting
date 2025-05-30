@@ -36,7 +36,7 @@
   }
 
 .scrollable-goal-list {
-  height: 88vh;
+  height: 86vh;
   overflow-y: auto;  
   scrollbar-width: thin;
   scrollbar-color: gray transparent; /* 滑動條是灰色，背景透明 */

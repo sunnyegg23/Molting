@@ -223,3 +223,22 @@ def get_goal_service(user_id, goal_id):
     except Exception as e:
         logging.error(f"Service Error: {str(e)}", exc_info=True)
         return {'error': f'資料庫查詢失敗: {str(e)}'}, 500
+    
+def update_task_status_service(user_id, goal_id, task_id, new_status):
+    try:
+        db = firestore.client()
+        task_ref = db.collection(f'users/{user_id}/goalBreakdown/{goal_id}/tasks').document(task_id)
+
+        task = task_ref.get()
+        if not task.exists:
+            return {'error': '任務不存在'}, 404
+
+        task_ref.update({
+            'status': new_status
+        })
+
+        return {'message': '任務狀態已更新'}, 200
+
+    except Exception as e:
+        logging.error(f"更新任務狀態錯誤: {str(e)}", exc_info=True)
+        return {'error': f'更新失敗: {str(e)}'}, 500    

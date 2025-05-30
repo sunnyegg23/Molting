@@ -1,6 +1,13 @@
 # app/goal_breakdown/routes.py
 from flask import Blueprint, request, jsonify
-from goal_breakdown.services import create_goal_breakdown_service,get_tasks_service,get_all_goals_service,get_goal_service
+from goal_breakdown.services import (
+    create_goal_breakdown_service,
+    get_tasks_service,
+    get_all_goals_service,
+    get_goal_service,
+    update_task_status_service
+)
+
 import logging
 
 breakdown_bp = Blueprint('goal', __name__)
@@ -38,4 +45,20 @@ def get_goal(user_id, goal_id):
         return jsonify(result), status_code
     except Exception as e:
         logging.error(f"Route Error: {str(e)}")
+        return jsonify({'error': '伺服器錯誤'}), 500
+    
+@breakdown_bp.route('/users/<string:user_id>/goal_breakdown/<string:goal_id>/tasks/<string:task_id>', methods=['PATCH'])
+def update_task_status(user_id, goal_id, task_id):
+    try:
+        data = request.json
+        new_status = data.get('status')
+
+        if not new_status:
+            return jsonify({'error': '缺少新的狀態值'}), 400
+
+        result, status_code = update_task_status_service(user_id, goal_id, task_id, new_status)
+        return jsonify(result), status_code
+
+    except Exception as e:
+        logging.error(f"更新任務狀態 API 錯誤: {str(e)}")
         return jsonify({'error': '伺服器錯誤'}), 500
