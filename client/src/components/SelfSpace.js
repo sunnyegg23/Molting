@@ -13,7 +13,9 @@ function SelfSpace() {
   });
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
-
+  const [fileList, setFileList] = useState([]);
+  const [isLoadingFiles, setIsLoadingFiles] = useState(false);
+  
   const API_BASE_URL = 'http://localhost:5000/api';
   const FILE_BASE_URL = 'http://localhost:5000'; // 用來拼接檔案連結
   const userId = "user123";
@@ -45,7 +47,8 @@ function SelfSpace() {
     }
   };
 
-  const fetchAllFiles = async () => {
+    const fetchAllFiles = async () => {
+    setIsLoadingFiles(true); // ⬅️ 開始 loading
     try {
       const url = `${API_BASE_URL}/users/${userId}/file_manage/all_files`;
       const res = await fetch(url);
@@ -55,6 +58,8 @@ function SelfSpace() {
     } catch (err) {
       console.error("❌ 無法取得檔案：", err);
       return [];
+    } finally {
+      setIsLoadingFiles(false); // ⬅️ 抓完關閉 loading
     }
   };
 
@@ -188,65 +193,69 @@ function SelfSpace() {
                   />
                 </div>
 
-                <button type="submit" style={{ padding: '5px 25px', borderRadius: '3px', backgroundColor: 'transparent', color: '#68c98c', border: '1px solid #68c98c', marginLeft:"5px", marginTop:"10px" , marginBottom:"25px"}}>
+                <button type="submit" style={{ padding: '5px 25px', borderRadius: '3px', backgroundColor: 'transparent', color: '#68c98c', border: '1px solid #68c98c', marginLeft:"5px", marginTop:"10px" , marginBottom:"25px",}}
+                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.03)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
                   上傳
                 </button>
               </form>
             </div>
           </div>
 
-          <div style={{ margin: '20px', padding: '20px',}}>
+          <div style={{ margin: '20px', padding: '20px' }}>
             <h3>已上傳的資料</h3>
-            {uploadedFiles.length === 0 ? (
+
+            {isLoadingFiles ? (
+              <p style={{ color: '#aaa' }}>載入中...</p>
+            ) : uploadedFiles.length === 0 ? (
               <p style={{ color: '#aaa' }}>目前沒有資料～</p>
             ) : (
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '20px',
-                paddingLeft: 0,
-              }}
-            >
-              {uploadedFiles.map((file, index) => {
-                const filename = file.fileName;
-                const fileUrl = `http://localhost:5000/api/uploads/${filename}`;
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '20px',
+                  paddingLeft: 0,
+                }}
+              >
+                {uploadedFiles.map((file, index) => {
+                  const filename = file.fileName;
+                  const fileUrl = `http://localhost:5000/api/uploads/${filename}`;
+                  const goal = allGoals.find(goal => goal.id === file.goalId);
+                  const goalName = goal ? goal.eventName : "（未知目標）";
 
-                const goal = allGoals.find(goal => goal.id === file.goalId);
-                const goalName = goal ? goal.eventName : "（未知目標）";
-
-                return (
-                  <div
-                    key={index}
-                    style={{
-                      flex: '1 1 calc(25% - 20px)', 
-                      backgroundColor: "rgba(45, 50, 57, 0.4)",
-                      padding: "20px",
-                      color: 'white',
-                      borderRadius: '8px',
-                      boxSizing: 'border-box',
-                      minWidth: '220px',
-                      maxWidth: '300px',
-                    }}
-                  >
-                    <strong>{file.title}</strong>
-                    <div style={{ fontSize: '13px', marginTop: '5px' }}>
-                      上傳時間：{moment(file.uploadTime).format('YYYY-MM-DD HH:mm')}<br />
-                      目標：{goalName}
-                    </div>
-                    <a
-                      href={fileUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ color: '#4fc3f7', display: 'inline-block', marginTop: '8px' }}
+                  return (
+                    <div
+                      key={index}
+                      style={{
+                        flex: '1 1 calc(25% - 20px)',
+                        backgroundColor: "rgba(45, 50, 57, 0.4)",
+                        padding: "20px",
+                        color: 'white',
+                        borderRadius: '8px',
+                        boxSizing: 'border-box',
+                        minWidth: '220px',
+                        maxWidth: '300px',
+                        height:"150px"
+                      }}
                     >
-                      查看檔案
-                    </a>
-                  </div>
-                );
-              })}
-            </div>
-
+                      <strong>{file.title}<br /><br /></strong>
+                      <div style={{ fontSize: '13px', marginTop: '5px' }}>
+                        上傳時間：{moment(file.uploadTime).format('YYYY-MM-DD HH:mm')}<br />
+                        目標：{goalName}
+                      </div>
+                      <a
+                        href={fileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: '#4fc3f7', display: 'inline-block', marginTop: '8px' }}
+                      >
+                        查看檔案
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
             )}
           </div>
         </div>
