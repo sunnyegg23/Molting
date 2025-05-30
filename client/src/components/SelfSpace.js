@@ -115,7 +115,12 @@ function SelfSpace() {
 
     } catch (err) {
       console.error("❌ 上傳失敗：", err);
-      alert("上傳失敗，請稍後再試");
+        toast.current.show({
+        severity: 'error',
+        summary: '上傳失敗',
+        detail: "請稍後再試",
+        life: 3000
+        });
     }
   };
 

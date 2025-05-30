@@ -4,7 +4,7 @@ import ArticleReminder from './ArticleReminder';
 import GoalBreakdown from './GoalBreakdown'
 import HabitsBuilding from './HabitsBuilding';
 
-export default function FloatingMenu() {
+export default function FloatingMenu({ toastRef }) {
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(null); // null、'article'、'goal'、'habit'
 
@@ -48,17 +48,17 @@ export default function FloatingMenu() {
 
       {/* 記事提醒頁面 */}
       {open && currentPage === 'article' && (
-        <ArticleReminder onClose={() => setCurrentPage(null)} />
+        <ArticleReminder onClose={() => setCurrentPage(null)} toastRef={toastRef} />
       )}
 
       {/* 目標規劃、習慣養成頁面可依需求再加 */}
       {open && currentPage === 'goal' && (
-        <GoalBreakdown onClose={() => setCurrentPage(null)} />
+        <GoalBreakdown onClose={() => setCurrentPage(null)} toastRef={toastRef} />
       )}
 
         {/*  習慣養成頁面 */}
       {open && currentPage === 'habit' && (
-        <HabitsBuilding onClose={() => setCurrentPage(null)} />
+        <HabitsBuilding onClose={() => setCurrentPage(null)} toastRef={toastRef} />
       )}
     </div>
   );

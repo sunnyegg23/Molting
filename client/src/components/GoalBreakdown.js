@@ -1,9 +1,11 @@
 //GoalBreakdown.js
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../css/ArticleReminder.css';
+import { Toast } from 'primereact/toast';
 
-export default function GoalBreakdown({ onClose }) {
+export default function GoalBreakdown({ onClose,toastRef }) {
+  const toast = useRef(null);
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
   const [mode, setMode] = useState('簡易');
@@ -12,7 +14,12 @@ export default function GoalBreakdown({ onClose }) {
 
   const handleCreate = async () => {
     if (!name || !date || !mode || !description) { // 增加字段驗證
-      alert('請填寫所有欄位');
+      toast.current.show({
+      severity: 'warn',
+      summary: '提醒',
+      detail: "請填寫所有欄位",
+      life: 3000
+      });
       return;
     }
 
@@ -34,21 +41,39 @@ export default function GoalBreakdown({ onClose }) {
       });
 
       if (res.ok) {
-          const data = await res.json();   // <--- 這裡接收後端回傳內容
-        alert('建立成功！');
+        const data = await res.json();   // <--- 這裡接收後端回傳內容
+        toastRef.current?.show({
+        severity: 'success',
+        summary: '完成',
+        detail: "建立成功！",
+        life: 3000
+        });
         onClose();
-        navigate(`/calendar/${data.id}`); // 跳轉到 CalenderPage，並帶上 ID
+        setTimeout(() => {
+          navigate(`/calendar/${data.id}`);
+        }, 2000); // 跳轉到 CalenderPage，並帶上 ID
       } else {
         const err = await res.json();
-        alert(`建立失敗：${err.error || res.status}`);
+        toast.current.show({
+        severity: 'error',
+        summary: '建立失敗',
+        detail: (err.error || res.status),
+        life: 3000
+        });
       }
     } catch (e) {
-      alert('網路錯誤');
+        toastRef.current?.show({
+        severity: 'error',
+        summary: '錯誤',
+        detail: '網路錯誤',
+        life: 3000
+        });
     }
   };
 
   return (
         <div className="reminder-modal">
+          <Toast ref={toast} />
             <div className="reminder-container">
                 <button className="close-btn" onClick={onClose}>×</button>
                 <div className="reminder-header">

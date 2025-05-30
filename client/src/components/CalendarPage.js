@@ -8,8 +8,10 @@ import '../css/Calendar.css';
 import Navbar from '../components/Navbar';
 import FloatingMenu from "./FloatingMenu";
 import Chatroom from './Chatroom';  // 引入Chatroom組件
+import { Toast } from 'primereact/toast';
 
 function CalendarPage() {
+    const toast = useRef(null);
     const {goalId} = useParams();
     const navigate = useNavigate();
     const [date, setDate] = useState(new Date());
@@ -460,17 +462,18 @@ function CalendarPage() {
             </div>
         );
     }
-
     // 主要內容
     return (
+        <>
+        <Toast ref={toast} />
         <div className="CalendarPage">
             <Navbar/>
-
+            
             <div className="calendar-content">
                 {/* 頂部控制區 - 只保留選單 */}
                 <div className="top-controls"> 
                 <div className="floating-menu-wrapper">
-                <   FloatingMenu />
+                    <FloatingMenu toastRef={toast}></FloatingMenu>
                 </div>
                     {/* 目標選擇器 */}
                     {allGoals.length > 0 && (
@@ -634,7 +637,7 @@ function CalendarPage() {
 
             {/* 聊天室 */}
             {isChatOpen && <Chatroom onClose={toggleChat} goalInfo={goalInfo} />}
-        </div>
+        </div></>
     );
 }
 

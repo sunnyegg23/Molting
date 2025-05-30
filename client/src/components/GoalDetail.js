@@ -125,6 +125,7 @@ function GoalDetail() {
 
                 <p><strong>名稱：</strong>{goal.eventName}</p>
                 <p><strong>截止日期：</strong>{moment(goal.eventDeadLine).format('YYYY-MM-DD')}</p>
+                <p><strong>目標描述：</strong>{goal.eventDescription}</p> 
                 <p><strong>任務總數：</strong>{tasks.length}</p> 
                 <p><strong>目前進度：</strong></p>       
                 {tasks.length === 0 ? (

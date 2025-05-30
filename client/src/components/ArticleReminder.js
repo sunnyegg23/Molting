@@ -1,14 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import '../css/ArticleReminder.css';
+import { Toast } from 'primereact/toast';
 
-export default function ArticleReminder({onClose}) {
+export default function ArticleReminder({ onClose, toastRef }) {
+    const toast = useRef(null);
     const [name, setName] = useState('');
     const [date, setDate] = useState('');
     const [mode, setMode] = useState('簡易');
 
     const handleCreate = async () => {
         if (!name || !date || !mode) {
-            alert('請填寫所有欄位');
+            toastRef.current?.show({
+            severity: 'warn',
+            summary: '提醒',
+            detail: "請填寫所有欄位",
+            life: 3000
+            });
             return;
         }
         // 這裡請根據你的 user_id 來源調整
@@ -29,20 +36,36 @@ export default function ArticleReminder({onClose}) {
                 body: JSON.stringify(payload)
             });
             if (res.ok) {
-                alert('建立成功！');
+                toastRef.current?.show({
+                severity: 'success',
+                summary: '完成',
+                detail: "建立成功！",
+                life: 3000
+                });
                 onClose();
             } else {
                 const err = await res.json();
-                alert('建立失敗：' + (err.error || res.status));
+                toast.current.show({
+                severity: 'error',
+                summary: '建立失敗',
+                detail: (err.error || res.status),
+                life: 3000
+                });
             }
         } catch (e) {
-            alert('網路錯誤');
+                toastRef.current?.show({
+                severity: 'error',
+                summary: '錯誤',
+                detail: '網路錯誤',
+                life: 3000
+                });
         }
     };
 
 
     return (
         <div className="reminder-modal">
+            <Toast ref={toast}  />
             <div className="reminder-container">
                 <button className="close-btn" onClick={onClose}>×</button>
                 <div className="reminder-header">

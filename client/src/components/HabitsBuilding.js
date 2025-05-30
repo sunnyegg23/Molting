@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import '../css/HabitsBuilding.css';
+import { Toast } from 'primereact/toast';
 
-export default function HabitsBuilding({ onClose }) {
+export default function HabitsBuilding({ onClose, toastRef }) {
+    const toast = useRef(null)
     const [name, setName] = useState('');
     const [frequency, setFrequency] = useState('medium');
     const [intensity, setIntensity] = useState('medium');
 
     const handleCreate = async () => {
         if (!name || !frequency || !intensity) {
-            alert('請填寫所有欄位');
+            toastRef.current?.show({
+            severity: 'warn',
+            summary: '提醒',
+            detail: "請填寫所有欄位",
+            life: 3000
+            });
             return;
         }
 
@@ -29,19 +36,35 @@ export default function HabitsBuilding({ onClose }) {
             });
 
             if (res.ok) {
-                alert('習慣建立成功！');
+                toastRef.current?.show({
+                severity: 'success',
+                summary: '完成',
+                detail: "習慣建立成功！",
+                life: 3000
+                });
                 onClose();
             } else {
                 const err = await res.json();
-                alert('建立失敗：' + (err.error || res.status));
+                toast.current.show({
+                severity: 'error',
+                summary: '建立失敗',
+                detail: (err.error || res.status),
+                life: 3000
+                });
             }
         } catch (e) {
-            alert('網路錯誤');
+                toastRef.current?.show({
+                severity: 'error',
+                summary: '錯誤',
+                detail: '網路錯誤',
+                life: 3000
+                });
         }
     };
 
     return (
         <div className="habits-modal">
+            <Toast ref={toast}  />
             <div className="habits-container">
                 <button className="habits-close-btn" onClick={onClose}>×</button>
                 <div className="habits-header">
