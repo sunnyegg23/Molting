@@ -203,7 +203,7 @@ function GoalDetail() {
                         </div>
                 </ul>
                 )}
-                <div style={{ marginTop: '30px',borderTop:"1px solid rgb(168, 168, 168)"}}><h3 style={{marginLeft:"3%"}}>相關資料：</h3></div>
+                <div style={{ marginTop: '30px',borderTop:"1px solid rgb(168, 168, 168)"}}><h3 style={{marginLeft:"3%"}}>相關資料連結：</h3></div>
                 <div style={{ marginTop: '10px', marginLeft: "3%" }}>
                     {Array.isArray(goal.learningLinks) && goal.learningLinks.length > 0 ? (
                     <ul>

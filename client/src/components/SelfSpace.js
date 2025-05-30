@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import Navbar from '../components/Navbar';
 import '../css/TaskOverview.css';
 import moment from 'moment';
 import Select from 'react-select';
+import { Toast } from 'primereact/toast';
 
 function SelfSpace() {
+  const toast = useRef(null);
   const [selectedGoalId, setSelectedGoalId] = useState('');
   const [allGoals, setAllGoals] = useState([]);
   const [formData, setFormData] = useState({
@@ -42,13 +44,13 @@ function SelfSpace() {
       if (!res.ok) throw new Error("取得目標列表失敗");
       return data.goals || [];
     } catch (err) {
-      console.error("❌ 獲取目標列表失敗：", err);
+      console.error("獲取目標列表失敗：", err);
       return [];
     }
   };
 
     const fetchAllFiles = async () => {
-    setIsLoadingFiles(true); // ⬅️ 開始 loading
+    setIsLoadingFiles(true);
     try {
       const url = `${API_BASE_URL}/users/${userId}/file_manage/all_files`;
       const res = await fetch(url);
@@ -56,10 +58,10 @@ function SelfSpace() {
       if (!res.ok) throw new Error(data.error || "讀取檔案失敗");
       return data.files || [];
     } catch (err) {
-      console.error("❌ 無法取得檔案：", err);
+      console.error("無法取得檔案：", err);
       return [];
     } finally {
-      setIsLoadingFiles(false); // ⬅️ 抓完關閉 loading
+      setIsLoadingFiles(false);
     }
   };
 
@@ -67,7 +69,13 @@ function SelfSpace() {
     e.preventDefault();
 
     if (!selectedGoalId || !formData.title || !formData.file) {
-      alert("請填寫完整資訊並選擇檔案～");
+        toast.current.show({
+        severity: 'info',
+        summary: '提示',
+        detail: "請填寫完整資訊並選擇檔案～",
+        life: 3000
+        });
+
       return;
     }
 
@@ -77,7 +85,7 @@ function SelfSpace() {
     data.append('title', formData.title);
     data.append('file', formData.file);
 
-    console.log("📤 即將送出資料：", {
+    console.log("即將送出資料：", {
       title: formData.title,
       goalId: selectedGoalId,
       fileName: formData.file.name
@@ -94,8 +102,12 @@ function SelfSpace() {
       if (!res.ok) {
         throw new Error(result.error || "上傳失敗");
       }
-
-      alert("✅ 上傳成功！");
+        toast.current.show({
+        severity: 'success',
+        summary: '完成',
+        detail: "上傳成功！",
+        life: 3000
+        });
       setFormData({ title: '', file: null });
 
       // 重新抓所有目標與所有檔案，讓畫面一致
@@ -115,10 +127,11 @@ function SelfSpace() {
   return (
     <div className="CalendarPage">
       <Navbar />
+      <Toast ref={toast} />
       <div style={{ padding: '10px', marginLeft: "15%", color: "white", minHeight: '100vh' }}>
         <h2 style={{ color: "#CCC", fontSize: "26px", marginLeft: "2%" }}>個人資料庫</h2>
         <div className="scrollable-goal-list2">
-          <div style={{ margin: '20px', paddingRight: '20px', paddingLeft: '20px', backgroundColor: '#333', borderRadius: '8px' }}>
+          <div style={{ margin: '20px', paddingRight: '20px', paddingLeft: '20px', backgroundColor: 'rgba(53, 60, 70, 0.77)', borderRadius: '8px' }}>
             <div
               style={{ display: 'flex', justifyContent: 'space-between', cursor: 'pointer', alignItems: 'center' }}
               onClick={() => setIsUploadOpen(!isUploadOpen)}
@@ -248,7 +261,7 @@ function SelfSpace() {
                         href={fileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ color: '#4fc3f7', display: 'inline-block', marginTop: '8px' }}
+                        style={{ color: 'rgb(196, 229, 204)', display: 'inline-block', marginTop: '2px', fontSize:"15px" }}
                       >
                         查看檔案
                       </a>
