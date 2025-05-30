@@ -55,3 +55,34 @@
   background-color: gray;
   border-radius: 6px;
 }
+
+.upload-form-wrapper {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.7s ease;
+}
+
+.upload-form-wrapper.open {
+  max-height: 1000px; /* 足夠讓內容展開 */
+}
+
+.scrollable-goal-list2 {
+  height: 85vh;
+  overflow-y: auto;  
+  scrollbar-width: thin;
+  scrollbar-color: gray transparent; /* 滑動條是灰色，背景透明 */
+}
+
+/* 對於 Chrome / Edge / Safari */
+.scrollable-goal-list2::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-goal-list2::-webkit-scrollbar-track {
+  background: transparent; /* 背景透明 */
+}
+
+.scrollable-goal-list2::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 6px;
+}
