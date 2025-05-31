@@ -1,5 +1,5 @@
 import React, { useState,useRef } from 'react';
-import '../css/HabitsBuilding.css';
+import '../css/ArticleReminder.css';
 import { Toast } from 'primereact/toast';
 
 export default function HabitsBuilding({ onClose, toastRef }) {
@@ -63,14 +63,14 @@ export default function HabitsBuilding({ onClose, toastRef }) {
     };
 
     return (
-        <div className="habits-modal">
+        <div className="reminder-modal">
             <Toast ref={toast}  />
-            <div className="habits-container">
-                <button className="habits-close-btn" onClick={onClose}>×</button>
-                <div className="habits-header">
-                    <div className="habits-title">習慣名稱：</div>
+            <div className="reminder-container">
+                <button className="close-btn" onClick={onClose}>×</button>
+                <div className="reminder-header">
+                    <div className="reminder-title">習慣名稱：</div>
                     <input
-                        className="habits-input"
+                        className="reminder-input"
                         type="text"
                         value={name}
                         onChange={e => setName(e.target.value)}
@@ -78,12 +78,13 @@ export default function HabitsBuilding({ onClose, toastRef }) {
                     />
                 </div>
 
-                <div className="habits-row">
-                    <div className="habits-title">頻率：</div>
+                <div className="reminder-row">
+                    <div className="reminder-title">頻率：</div>
                     <select
-                        className="habits-input"
+                        className="reminder-input"
                         value={frequency}
                         onChange={e => setFrequency(e.target.value)}
+                        style={{width:"75px"}}
                     >
                         <option value="low">低</option>
                         <option value="medium">中</option>
@@ -91,12 +92,13 @@ export default function HabitsBuilding({ onClose, toastRef }) {
                     </select>
                 </div>
 
-                <div className="habits-row">
-                    <div className="habits-title">強度：</div>
+                <div className="reminder-row">
+                    <div className="reminder-title">強度：</div>
                     <select
-                        className="habits-input"
+                        className="reminder-input"
                         value={intensity}
                         onChange={e => setIntensity(e.target.value)}
+                        style={{width:"75px"}}
                     >
                         <option value="low">低</option>
                         <option value="medium">中</option>
@@ -104,11 +106,11 @@ export default function HabitsBuilding({ onClose, toastRef }) {
                     </select>
                 </div>
 
-                <div className="habits-desc">
+                <div className="reminder-desc">
                     系統將依照你的設定幫你拆解成每日小任務，幫助你 21 天養成這個習慣。
                 </div>
 
-                <button className="habits-create-btn" onClick={handleCreate}>建立習慣</button>
+                <button className="reminder-create-btn" onClick={handleCreate}>建立習慣</button>
             </div>
         </div>
     );

@@ -20,20 +20,22 @@
   top: 50%;                /* 垂直置中 */
   left: 50%;               /* 水平置中 */
   transform: translate(-50%, -50%);  /* 完全置中 */
-  z-index: 1000;           /* 保證在最上層 */
-  background: #fff;
-  border-radius: 16px;
+  z-index: 1000;          /* 保證在最上層 */
+  background: #ffffff;
+  border-radius: 3px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  padding: 48px 32px 48px 32px;
+  padding: 0px 32px 48px 32px;
   min-width: 600px;
+  border: 2px solid #dfdfdf;
 }
 
 .menu-title {
-  font-weight: bold;
+  font-weight: normal;
   font-size: 28px;
+  width: 79%;
   margin-bottom: 32px;
   text-align: center;
-  color: #757575;
+  color: #4d4d4d;
 }
 
 .menu-options {
@@ -50,27 +52,30 @@
 .menu-label {
   margin-bottom: 8px;
   font-size: 24px;
-  color: #757575;
+  color: #686868;
 }
 
 .menu-add-btn {
-  width: 80px;
-  height: 80px;
-  background: #B0BEC5;
-  color: #fff;
-  font-size: 32px;
+  width: 64px;
+  height: 64px;
+  background: #f0f0f0;
+  color: #919191;
+  font-size: 28px;
   border: none;
-  border-radius: 16px;
+  border-radius: 12px;
   cursor: pointer;
+  transition: background 0.2s ease;
+}
+.menu-add-btn:hover {
+  background: #a9b9b0;
+  color: #ffffff;
 }
 
 .menu-close-btn {
-  position: absolute;
-  top: 16px;
-  left: 24px;
   background: transparent;
   border: none;
+  width: 10%;
   font-size: 48px;
-  color: #B0BEC5;
+  color: #696969;
   cursor: pointer;
 }

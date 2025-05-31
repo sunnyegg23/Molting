@@ -155,7 +155,7 @@ function SelfSpace() {
                     type="text"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    style={{ marginTop:"10px", width: '100%', padding: '8px', borderRadius: '4px', backgroundColor: '#222', border:"none", color:"white" }}
+                    style={{ marginTop:"10px", width: '100%', padding: '8px', borderRadius: '4px', backgroundColor: 'rgb(35, 41, 46)', border:"none", color:"white" }}
                   />
                 </div>
 
@@ -179,7 +179,7 @@ function SelfSpace() {
                       control: (baseStyles) => ({
                         ...baseStyles,
                         marginTop:"10px",
-                        backgroundColor: '#222',
+                        backgroundColor: 'rgb(35, 41, 46)',
                         color: '#FFF',
                         borderColor: '#555',
                         borderRadius: '4px',

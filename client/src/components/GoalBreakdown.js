@@ -84,6 +84,7 @@ export default function GoalBreakdown({ onClose,toastRef }) {
                         value={name}
                         onChange={e => setName(e.target.value)}
                         placeholder="專案製作"
+                        style={{fontSize:"18px",height:"25px"}}
                     />
                 </div>
                 <div className="reminder-row">
@@ -101,32 +102,21 @@ export default function GoalBreakdown({ onClose,toastRef }) {
                 </div>
 
 
-                <div className="reminder-desc">
-                    這種目標類型就讓使用者能彈性決定怎麼用，有些人如果本身就有安排規劃的習慣就知道那天要幹嘛<br/><br/>
-                    在簡易版本裡不會有客製選項給你選擇
-                </div>
-                <div className="reminder-switch">
-                    <button
-                        className={`switch-btn ${mode === '簡易' ? 'active' : ''}`}
-                        onClick={() => setMode('簡易')}
-                    >簡易
-                    </button>
-                    <button
-                        className={`switch-btn ${mode === '進階' ? 'active' : ''}`}
-                        onClick={() => setMode('進階')}
-                    >進階
-                    </button>
-                </div>
 
-                <div className="reminder-row">
+
+          <div className="reminder-row">
           <div className="reminder-title">描述：</div>
           <textarea
             className="reminder-textarea"
             value={description}
             onChange={e => setDescription(e.target.value)}
             placeholder="輸入事件詳細描述"
+            style={{height:"50px",width:"200px"}}
           />
         </div>
+            <div className="reminder-desc">
+                    這種目標類型就讓使用者能彈性決定怎麼用，有些人如果本身就有安排規劃的習慣就知道那天要幹嘛
+                </div>
                 <button className="reminder-create-btn" onClick={handleCreate}>建立</button>
             </div>
         </div>

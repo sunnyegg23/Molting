@@ -214,7 +214,7 @@ function GoalDetail() {
                             href={item.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            style={{ color: '#4fc3f7', textDecoration: 'underline' }}
+                            style={{ color: 'rgb(196, 229, 226)', textDecoration: 'underline' }}
                             >
                             🔗 {item.title || `相關連結 ${index + 1}`}
                             </a>

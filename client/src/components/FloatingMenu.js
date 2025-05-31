@@ -26,14 +26,17 @@ export default function FloatingMenu({ toastRef }) {
       {/* 主選單（只有 open=true 而且 currentPage=null 才顯示） */}
       {open && currentPage === null && (
         <div className="menu-popup">
-          <button className="menu-close-btn" onClick={() => setOpen(false)}>
-            ×
-          </button>
-          <div className="menu-title">目標類型</div>
+          <div style={{display: 'flex', flexWrap:"wrap",width:"100%",marginBottom:"20px"}}>
+            <button className="menu-close-btn" onClick={() => setOpen(false)}>
+              ×
+            </button>
+            <p className="menu-title">目標類型</p>
+
+          </div>
           <div className="menu-options">
             {menuItems.map((item, idx) => (
               <div className="menu-option" key={item.label}>
-                <div className="menu-label">{idx + 1}. {item.label}</div>
+                <div className="menu-label"> {item.label}</div>
                 <button
                   className="menu-add-btn"
                   onClick={() => item.onClick()}
