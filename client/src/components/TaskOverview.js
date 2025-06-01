@@ -304,8 +304,8 @@ function TaskOverview() {
                     key={goal.id}
                     onClick={() => navigate(`/GoalDetail/${goal.id}`)}
                     style={{
-                        maxHeight: '180px',
-                        overflowY: 'auto',
+                        height: '25%',
+                    
                         backgroundColor: 'rgba(45, 50, 57, 0.5)',
                         padding: '10px',
                         borderRadius: '3px',
@@ -315,6 +315,7 @@ function TaskOverview() {
                         border: '1px solid #484848',
                         cursor: 'pointer',
                         transition: 'transform 0.2s',
+                        alignItems: 'flex-start',
                 }}
                 onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.03)'}
                 onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
