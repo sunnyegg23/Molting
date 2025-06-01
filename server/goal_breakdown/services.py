@@ -30,13 +30,18 @@ def create_goal_breakdown_service(user_id, data):
         # 階段 1：強化驗證
         validate_goal_data(data)
 
+        # 獲取使用者習慣資料
+        from working_habits.services import get_working_habits
+        user_habits = get_working_habits(user_id)
+        print(user_habits)
 
         # 階段 2：呼叫 LLM 生成任務
         llm_response = generate_structured_output(
             event_name=data['eventName'],
             event_deadline=data['eventDeadLine'],
             created_at=created_at,  # 傳入創建時間
-            event_description=data['eventDescription']
+            event_description=data['eventDescription'],
+            user_habits=user_habits  # 傳入使用者習慣
         )
         
         # 使用 eventName + eventDescription 組成搜尋查詢

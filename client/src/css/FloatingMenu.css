@@ -3,79 +3,185 @@
   display: inline-block;
 }
 
+/* 主要添加按鈕 */
 .fab-btn {
   width: 115px;
   height: 40px;
-  border-radius: 5%;
-  background: #90a4ae00;
-  border: 1px solid #68c98c;
+  border-radius: 6px;
+  background: rgba(144, 164, 174, 0);
+  border: 1.5px solid #68c98c;
   color: #68c98c;
   font-size: 16px;
-
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
+.fab-btn:hover {
+  background-color: rgba(104, 201, 140, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(104, 201, 140, 0.2);
+}
+
+/* 菜單彈出窗 */
 .menu-popup {
-  position: fixed;         /* 讓菜單懸浮在畫面上 */
-  top: 50%;                /* 垂直置中 */
-  left: 50%;               /* 水平置中 */
-  transform: translate(-50%, -50%);  /* 完全置中 */
-  z-index: 1000;          /* 保證在最上層 */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
   background: #ffffff;
-  border-radius: 3px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  padding: 0px 32px 48px 32px;
-  min-width: 600px;
-  border: 2px solid #dfdfdf;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 25px 35px 45px 35px;
+  min-width: 650px;
+  max-width: 90vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  border: none;
+}
+
+/* 菜單頭部區域 */
+.menu-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  position: relative;
 }
 
 .menu-title {
-  font-weight: normal;
-  font-size: 28px;
-  width: 79%;
-  margin-bottom: 32px;
+  font-weight: 500;
+  font-size: 26px;
+  color: #444;
+  margin: 0 auto;
   text-align: center;
-  color: #4d4d4d;
-}
-
-.menu-options {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.menu-option {
-  text-align: center;
-  flex: 1;
-}
-
-.menu-label {
-  margin-bottom: 8px;
-  font-size: 24px;
-  color: #686868;
-}
-
-.menu-add-btn {
-  width: 64px;
-  height: 64px;
-  background: #f0f0f0;
-  color: #919191;
-  font-size: 28px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-.menu-add-btn:hover {
-  background: #a9b9b0;
-  color: #ffffff;
 }
 
 .menu-close-btn {
+  position: absolute;
+  top: -10px;
+  left: -15px;
   background: transparent;
   border: none;
-  width: 10%;
-  font-size: 48px;
+  font-size: 42px;
   color: #696969;
   cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.menu-close-btn:hover {
+  color: #333;
+}
+
+/* 選項容器 */
+.menu-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 選項項目 */
+.menu-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 18px 22px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #eee;
+}
+
+.menu-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 選項標籤和描述 */
+.menu-label {
+  font-size: 20px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+.menu-desc {
+  font-size: 15px;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 選項卡片頭部 */
+.menu-option-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.menu-option-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #444;
+}
+
+.menu-option-description {
+  font-size: 15px;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 添加按鈕 */
+.menu-option-add-btn {
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  color: #68c98c;
+  font-size: 20px;
+  border: 1.5px solid #68c98c;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-option-add-btn:hover {
+  background: #68c98c;
+  color: white;
+}
+
+/* 菜單選項加號按鈕 */
+.menu-add-btn {
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  color: #68c98c;
+  font-size: 20px;
+  border: 1.5px solid #68c98c;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-add-btn:hover {
+  background: #68c98c;
+  color: white;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .menu-popup {
+    min-width: 95vw;
+    padding: 20px;
+  }
+  
+  .menu-option-card {
+    padding: 15px;
+  }
 }
