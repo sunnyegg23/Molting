@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../css/FloatingMenu.css';
 import ArticleReminder from './ArticleReminder';
-import GoalBreakdown from './GoalBreakdown'
+import GoalBreakdown from './GoalBreakdown';
 import HabitsBuilding from './HabitsBuilding';
 
 export default function FloatingMenu({ toastRef }) {
@@ -10,9 +10,21 @@ export default function FloatingMenu({ toastRef }) {
 
   // menuItems 要寫在 function 裡面，才能用 setCurrentPage
   const menuItems = [
-    { label: '記事提醒', onClick: () => setCurrentPage('article') },
-    { label: '目標規劃', onClick: () => setCurrentPage('goal') },
-    { label: '習慣養成', onClick: () => setCurrentPage('habit') },
+    { 
+      label: '記事提醒', 
+      desc: '單次事件的紀錄，像是聚餐、開會等一次性事件',
+      onClick: () => setCurrentPage('article') 
+    },
+    { 
+      label: '目標規劃',
+      desc: '用於需要規劃與拆解的長期目標',
+      onClick: () => setCurrentPage('goal') 
+    },
+    { 
+      label: '習慣養成',
+      desc: '協助養成持續21天的新習慣', 
+      onClick: () => setCurrentPage('habit') 
+    },
   ];
 
   // 條件渲染
@@ -26,17 +38,19 @@ export default function FloatingMenu({ toastRef }) {
       {/* 主選單（只有 open=true 而且 currentPage=null 才顯示） */}
       {open && currentPage === null && (
         <div className="menu-popup">
-          <div style={{display: 'flex', flexWrap:"wrap",width:"100%",marginBottom:"20px"}}>
+          <div className="menu-header">
             <button className="menu-close-btn" onClick={() => setOpen(false)}>
               ×
             </button>
-            <p className="menu-title">目標類型</p>
-
+            <p className="menu-title">請選擇目標類型</p>
           </div>
           <div className="menu-options">
             {menuItems.map((item, idx) => (
               <div className="menu-option" key={item.label}>
-                <div className="menu-label"> {item.label}</div>
+                <div>
+                  <div className="menu-label">{item.label}</div>
+                  <div className="menu-desc">{item.desc}</div>
+                </div>
                 <button
                   className="menu-add-btn"
                   onClick={() => item.onClick()}
@@ -54,12 +68,12 @@ export default function FloatingMenu({ toastRef }) {
         <ArticleReminder onClose={() => setCurrentPage(null)} toastRef={toastRef} />
       )}
 
-      {/* 目標規劃、習慣養成頁面可依需求再加 */}
+      {/* 目標規劃頁面 */}
       {open && currentPage === 'goal' && (
         <GoalBreakdown onClose={() => setCurrentPage(null)} toastRef={toastRef} />
       )}
 
-        {/*  習慣養成頁面 */}
+      {/* 習慣養成頁面 */}
       {open && currentPage === 'habit' && (
         <HabitsBuilding onClose={() => setCurrentPage(null)} toastRef={toastRef} />
       )}

@@ -5,7 +5,7 @@
   width: 100vw;
   height: 100vh;
   z-index: 2000;
-  background: rgba(0,0,0,0.15); /* 半透明遮罩，可選 */
+  background: rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,172 +13,196 @@
 
 .reminder-container {
   background: #ffffff;
-  border-radius: 3px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  padding: 0px 32px 48px 32px;
-  min-width: 600px;
-  border: 2px solid #dfdfdf;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  padding: 15px 32px 50px 32px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  padding: 25px 35px 60px 35px;
   min-width: 600px;
   max-width: 95vw;
-  max-height: 90vh;
+  max-height: 85vh;
   overflow-y: auto;
   position: relative;
+  border: none;
 }
 
-
 .close-btn {
+  position: absolute;
+  top: 15px;
+  left: 25px;
   background: transparent;
   border: none;
-  font-size: 48px;
+  font-size: 42px;
   color: #696969;
   cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #333;
 }
 
 .reminder-header {
-  margin-top: 0px;
+  margin-top: 30px;
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 1%;
-  margin-top: 4%;
+  margin-bottom: 20px;
 }
 
 .reminder-title {
   font-size: 20px;
   color: #464646;
-  min-width: 80px;
-  margin-left: 2%;
+  min-width: 100px;
+  font-weight: 500;
 }
 
 .reminder-input {
-  font-size: 20px;
-  padding: 0px 16px;
-  border: 1.5px solid #B0BEC5;
+  font-size: 18px;
+  padding: 8px 16px;
+  border: 1.5px solid #ddd;
   border-radius: 8px;
-  width: 260px;
+  width: 280px;
   color: #383838;
+  transition: all 0.2s ease;
+  background-color: #fff;
 }
+
 .reminder-input:focus {
   outline: none;
-  border-color: #5daf7f;
-  box-shadow: 0 0 0 2px rgba(93, 175, 127, 0.2);
+  border-color: #68c98c;
+  box-shadow: 0 0 0 3px rgba(104, 201, 140, 0.15);
 }
+
+.reminder-input:hover {
+  border-color: #bbb;
+}
+
+.reminder-textarea {
+  font-size: 16px;
+  padding: 10px 16px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  width: 280px;
+  color: #383838;
+  resize: none;
+  transition: all 0.2s ease;
+  background-color: #fff;
+}
+
+.reminder-textarea:focus {
+  outline: none;
+  border-color: #68c98c;
+  box-shadow: 0 0 0 3px rgba(104, 201, 140, 0.15);
+}
+
+.reminder-textarea:hover {
+  border-color: #bbb;
+}
+
+/* 下拉選單樣式 */
+select.reminder-input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23383838' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 35px;
+}
+
 .reminder-row {
-  margin-top: 0px;
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 1%;
+  margin-bottom: 20px;
 }
 
 .reminder-type {
-  font-size: 20px;
-  color: #757575;
+  font-size: 18px;
+  color: #68c98c;
+  font-weight: 500;
 }
 
 .reminder-date {
   appearance: none;
-  -webkit-appearance: none; /* for Safari */
+  -webkit-appearance: none;
   background-color: #fff;
-  border: 1.5px solid #ccc;
+  border: 1.5px solid #ddd;
   border-radius: 8px;
-  padding: 1px 14px;
-  font-size: 15px;
-  color: #333;
+  padding: 8px 16px;
+  font-size: 16px;
+  color: #383838;
   font-family: 'Segoe UI', sans-serif;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.2s ease;
   width: 200px;
-  box-sizing: border-box;
 }
 
 .reminder-date:hover {
-  border-color: #aaa;
+  border-color: #bbb;
 }
 
 .reminder-date:focus {
   outline: none;
-  border-color: #5daf7f;
-  box-shadow: 0 0 0 2px rgba(93, 175, 127, 0.2);
+  border-color: #68c98c;
+  box-shadow: 0 0 0 3px rgba(104, 201, 140, 0.15);
 }
 
-/* 移除日期右邊的小 icon（選配） */
 .reminder-date::-webkit-calendar-picker-indicator {
   cursor: pointer;
   filter: invert(50%);
   transition: filter 0.2s ease;
 }
+
 .reminder-date:hover::-webkit-calendar-picker-indicator {
   filter: invert(70%);
 }
 
-
-.reminder-date-btn {
-  margin-left: 8px;
-  font-size: 20px;
-  background: #fff;
-  border: 1.5px solid #B0BEC5;
-  border-radius: 8px;
-  color: #B0BEC5;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-}
-
 .reminder-desc {
-  margin-top: 32px;
+  margin-top: 25px;
   font-size: 16px;
-  color: #767676;
+  color: #666;
   line-height: 1.6;
-  margin-left: 2%;
-  margin-right: 30%;
-}
-
-.reminder-switch {
-  position: absolute;
-  top: 24px;
-  right: 32px;
-  display: flex;
-  background: #ECEFF1;
-  border-radius: 24px;
-  overflow: hidden;
-}
-
-.switch-btn {
-  border: none;
-  background: transparent;
-  color: #757575;
-  font-size: 20px;
-  padding: 8px 32px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.switch-btn.active {
-  background: #90A4AE;
-  color: #fff;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #68c98c;
+  width: 60%;
 }
 
 .reminder-create-btn {
-  position:absolute;
-  right:35px;
-  bottom:50px;
+  position: absolute;
+  right: 35px;
+  bottom: 30px;
   width: 120px;
-  height: 40px;
+  height: 45px;
   background: #ffffff;
-  color: #9a9a9a;
-  font-size: 20px;
-  border: none;
-  border-radius: 5px;
+  color: #68c98c;
+  font-size: 18px;
+  border: 1.5px solid #68c98c;
+  border-radius: 8px;
   cursor: pointer;
-  letter-spacing: 2px;
-  border: 2px solid #b3b3b3;
-  transition: background 0.2s ease;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 .reminder-create-btn:hover {
-  background: #999999;
-  color: #ffffff;
-  border: none;
+  background: #68c98c;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(104, 201, 140, 0.2);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .reminder-container {
+    min-width: 95vw;
+    padding: 20px;
+  }
+  
+  .reminder-input, .reminder-date, .reminder-textarea {
+    width: 100%;
+  }
+  
+  .reminder-desc {
+    width: 90%;
+  }
 }
