@@ -5,7 +5,7 @@ from goal_breakdown.services import (
     get_tasks_service,
     get_all_goals_service,
     get_goal_service,
-    update_task_status_service
+    update_task_status_service,
 )
 
 import logging
@@ -62,3 +62,12 @@ def update_task_status(user_id, goal_id, task_id):
     except Exception as e:
         logging.error(f"更新任務狀態 API 錯誤: {str(e)}")
         return jsonify({'error': '伺服器錯誤'}), 500
+
+
+@breakdown_bp.route('/users/<string:user_id>/goal_breakdown/<string:goal_id>', methods=['DELETE'])
+def delete_goal(user_id, goal_id):
+    """刪除特定目標及其所有任務"""
+    from goal_breakdown.services import delete_goal_service
+
+    result, status_code = delete_goal_service(user_id, goal_id)
+    return jsonify(result), status_code
