@@ -304,6 +304,8 @@ function TaskOverview() {
                     key={goal.id}
                     onClick={() => navigate(`/GoalDetail/${goal.id}`)}
                     style={{
+                        maxHeight: '180px',
+                        overflowY: 'auto',
                         backgroundColor: 'rgba(45, 50, 57, 0.5)',
                         padding: '10px',
                         borderRadius: '3px',

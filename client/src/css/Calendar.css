@@ -442,29 +442,28 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 50px;
+  width: 500px;
   height: 50px;
-  border-radius: 50%;
-  background-color: #2196f3;
-  color: white;
+  background-color: transparent;  /* 改成透明 */
   border: none;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: none; /* 或也可以移除陰影 */
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: transform 0.2s;
 }
 
 .chat-button:hover {
-  background-color: #1976d2;
+  background-color: transparent; /* 移除 hover 背景色 */
   transform: scale(1.05);
 }
 
-.chat-button svg {
-  width: 24px;
-  height: 24px;
+.chat-button img {
+  width: 50px;  /* 確保 GIF 大小符合按鈕 */
+  height: 50px;
+  pointer-events: none; /* 讓滑鼠事件仍作用在按鈕上 */
 }
 
 /* 項目選擇器 */
