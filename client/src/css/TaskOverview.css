@@ -36,10 +36,9 @@
   }
 
 .scrollable-goal-list {
-  height:auto;
   align-items: flex-start;
   max-height: 86vh;
-  
+  overflow-y: auto;  
   scrollbar-width: thin;
   scrollbar-color: gray transparent; /* 滑動條是灰色，背景透明 */
 }
