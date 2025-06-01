@@ -241,4 +241,40 @@ def update_task_status_service(user_id, goal_id, task_id, new_status):
 
     except Exception as e:
         logging.error(f"更新任務狀態錯誤: {str(e)}", exc_info=True)
-        return {'error': f'更新失敗: {str(e)}'}, 500    
+        return {'error': f'更新失敗: {str(e)}'}, 500
+
+
+def delete_goal_service(user_id, goal_id):
+    """刪除特定目標及其所有相關任務"""
+    try:
+        db = firestore.client()
+        batch = db.batch()
+
+        # 獲取目標文檔參考
+        goal_ref = db.collection(f'users/{user_id}/goalBreakdown').document(goal_id)
+        goal_doc = goal_ref.get()
+
+        # 檢查目標是否存在
+        if not goal_doc.exists:
+            return {'error': '目標不存在'}, 404
+
+        # 獲取目標下所有任務
+        tasks_ref = db.collection(f'users/{user_id}/goalBreakdown/{goal_id}/tasks')
+        tasks = tasks_ref.stream()
+
+        # 將所有任務添加到批量刪除操作中
+        for task in tasks:
+            task_ref = tasks_ref.document(task.id)
+            batch.delete(task_ref)
+
+        # 將目標文檔添加到批量刪除操作
+        batch.delete(goal_ref)
+
+        # 執行批量刪除
+        batch.commit()
+
+        return {'message': '目標及其所有任務已成功刪除'}, 200
+
+    except Exception as e:
+        logging.error(f"刪除目標錯誤: {str(e)}", exc_info=True)
+        return {'error': f'刪除目標失敗: {str(e)}'}, 500
