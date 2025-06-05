@@ -16,14 +16,32 @@ server/
 ```
 
 ## Frontend
-1. Components資料夾裡的檔案名稱以及class都建議開頭大寫
-> 元件（component）檔案和檔案內的元件 class/function 名稱都建議第一個字大寫
+1. 前端在client這個資料夾
+```
+cd client
+```
+2. 請run以下指令以開啟前端伺服器
+```
+npm start
+```
 
 ## Backend
-1. 下載套件時請run以下指令，並且需要新套件時加進requirements.txt
+1. 後端在server這個資料夾
+```
+cd server
+```
+2. 下載套件時請run以下指令
 ```
 pip install -r requirements.txt
 ```
+3. 請run以下指令以開啟後端伺服器
+```
+python app.py
+```
 
-
+#Swagger
+1. 開啟伺服器後進入這個網址可以看到api文件長相
+```
+http://localhost:5000/swagger
+```
 
