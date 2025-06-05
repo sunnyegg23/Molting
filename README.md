@@ -39,7 +39,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-#Swagger
+## Swagger
 1. 開啟伺服器後進入這個網址可以看到api文件長相
 ```
 http://localhost:5000/swagger
