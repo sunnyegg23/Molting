@@ -1,7 +1,68 @@
-# What is Molting?
-Molting is an intelligent calendar and productivity app designed to help users break down large goals into manageable daily tasks based on their working habits, energy levels, and deadlines. 
-# Project Structure
+# Molting
 
+**INTELLIGENT GOAL BREAKDOWN & TASK SCHEDULING APP**
+
+---
+
+## 目標
+
+- 自動將複雜目標分解為結構化的每日任務
+- 根據用戶習慣和精力水平提供個人化排程
+- 推薦符合用戶目標的學習資源
+
+---
+
+## 系統架構與技術棧
+
+- **前端**：React.js、HTML、CSS
+- **後端**：Flask (Python) 模組化架構
+- **資料庫**：Firebase Firestore（NoSQL 文件型資料庫）
+- **AI 整合**：Mistral LLM API 用於智慧任務分解
+- **對話式 AI**：多模態聊天系統，具備工具存取能力
+- **搜尋**：Google Custom Search Engine 推薦資源
+- **API 整合**：RESTful 端點，支援 AI agent function calling
+
+---
+
+## 專案背景與目標
+
+Molting 是一款智慧型行事曆與生產力應用，協助用戶根據工作習慣、精力水平與截止日期，將大型目標拆解為可管理的每日任務。
+
+---
+
+## 主要功能
+
+- **個人化管理**：根據用戶工作習慣、精力與頻率偏好自動調整
+- **自動任務分解**：LLM 協助將大型目標拆解為每日小任務
+- **對話式聊天機器人**：與系統對話，探索目標並優化任務
+- **資源推薦**：智慧搜尋，推薦有助於達成目標的學習資源
+- **文件儲存**：儲存用戶想要閱讀或參考的文件、文章與資料
+
+---
+
+## 前後端架構
+
+### Frontend (React)
+- HomePage → Goal UI & Habit UI
+- WorkingHabitsPage → WorkingHabits
+- RESTful API Calls
+
+### Backend (Flask)
+- `/routes` → `/services` → `/llm_model`
+
+### AI & 整合
+- **Mistral LLM**：目標分解為任務
+- **Google CSE API**：學習資源推薦
+- **Firebase Firestore**：
+  - `users/{userId}/goal_breakdown/tasks/`
+  - `users/{userId}/habit_building/tasks/`
+  - ...
+
+---
+
+> Molting 讓目標管理與日常規劃變得智慧且個人化，助你高效實現每一個目標。
+
+## Project Structure
 ```
 client/
     public/圖片們放這
