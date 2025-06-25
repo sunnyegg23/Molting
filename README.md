@@ -1,3 +1,5 @@
+# What is Molting?
+Molting is an intelligent calendar and productivity app designed to help users break down large goals into manageable daily tasks based on their working habits, energy levels, and deadlines. 
 # Project Structure
 
 ```
